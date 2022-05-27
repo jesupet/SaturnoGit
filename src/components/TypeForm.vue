@@ -12,12 +12,13 @@
           aria-describedby="button-addon2"
           required
         />
-        <input
+        <button @click.prevent="activateNewsletterSub(subscriberEmail)"><font-awesome-icon icon="fa-solid fa-arrow-right" size="3x" inverse/></button>
+        <!--<input
           type="submit"
           value="Suscribirme"
           class="mx-2"
           @click.prevent="activateNewsletterSub(subscriberEmail)"
-        />
+        />-->
       </form>
     </div>
   </div>

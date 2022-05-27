@@ -36,7 +36,6 @@
             Totales: {{ tour.vacancies }}
           </li>
         </ul>
-        <div class="card-body">
           <button
             class="btn btn-primary"
             data-bs-toggle="modal"
@@ -51,7 +50,6 @@
             :index="index"
             :description="tour.description"
           />
-        </div>
       </div>
     </div>
   </div>
