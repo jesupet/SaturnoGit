@@ -10,7 +10,7 @@
     <section class="main-section">
       <b-container>
         <h2 class="title">NUESTROS TOURS DESTACADOS</h2>
-        <ToursCard :listTours="listTours" />
+        <HomeTour :listTours="listTours"/>
       </b-container>
     </section>
     <TypeForm/>
@@ -19,13 +19,13 @@
 
 <script>
 
-import ToursCard from "@/components/ToursCard.vue";
+import HomeTour from '../components/HomeTour.vue'
 import TypeForm from '../components/TypeForm.vue'
 import { mapState } from "vuex";
 
 export default {
   name: "HomeView",
-  components: { TypeForm, ToursCard },
+  components: { TypeForm, HomeTour},
   computed: {
     ...mapState(["listTours"]),
   },

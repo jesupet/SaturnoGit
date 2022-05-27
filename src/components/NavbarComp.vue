@@ -1,45 +1,57 @@
 <template>
   <div>
-    <b-navbar type="dark" class="nav_comp">
-      <b-navbar-brand class="mx-5" to="/">
-        <img
-          src="../assets/saturn_logo.svg"
-          class="d-inline-block align-middle saturn-icon"
-          alt="Kitten"
-          fluid
-        />¡SA-TOUR-NOW!
-      </b-navbar-brand>
-
-      <b-navbar-nav align="end" class="nav_menu">
-        <router-link class="nav-link" to="/tours">Tours</router-link>
-        <router-link class="nav-link mx-4" to="/users"
-          >Mis Tours Favoritos</router-link
-        >
-        <div v-if="activeUser == undefined" class="d-inline">
-          <LogInModal class="d-inline"/>
-          <SignUpModal class="d-inline"/>
+    <nav class="navbar navbar-expand-lg nav_comp navbar-dark">
+      <div class="container-fluid my-0">
+        <a class="navbar-brand" to="/">
+          <img
+            src="../assets/saturn_logo.svg"
+            class="d-inline-block align-middle saturn-icon"
+            alt="Kitten"
+            fluid
+          />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="nav_menu collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav m-0">
+            <li class="nav-item">
+              <router-link class="nav-link" to="/tours">Tours</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link mx-4" to="/users">Mis Tours Favoritos</router-link>
+            </li>
+            <li class="nav-item">
+              <b-button
+                v-if="activeUser != undefined"
+                variant="light"
+                size="sm"
+                class="my-2 my-sm-0"
+                type="submit"
+                >{{ activeUser.email }}</b-button
+              >
+            <li class="nav-item">
+              <b-button
+                v-if="activeUser != undefined"
+                variant="warning"
+                size="sm"
+                class="my-2 mx-2 my-sm-0"
+                type="submit"
+                @click.stop.prevent="logOutUser"
+                to="/"
+              >
+                <img src="../assets/icons/door-closed.svg" alt="Cerrar sesión" />
+              </b-button>
+            </li>
+          </ul>
         </div>
-        <b-button
-          v-if="activeUser != undefined"
-          variant="light"
-          size="sm"
-          class="my-2 my-sm-0"
-          type="submit"
-          >{{ activeUser.email }}</b-button
-        >
-        <b-button
-          v-if="activeUser != undefined"
-          variant="warning"
-          size="sm"
-          class="my-2 mx-2 my-sm-0"
-          type="submit"
-          @click.stop.prevent="logOutUser"
-          to="/"
-        >
-          <img src="../assets/icons/door-closed.svg" alt="Cerrar sesión" />
-        </b-button>
-      </b-navbar-nav>
-    </b-navbar>
+        <div v-if="activeUser == undefined" class="d-inline">
+              <LogInModal class="d-inline"/>
+              <SignUpModal class="d-inline"/>
+        </div>
+      </div>
+      
+    </nav>
   </div>
 </template>
 
@@ -73,17 +85,23 @@ export default {
 </script>
 
 <style scoped>
+*{
+  text-decoration: none;
+  list-style: none;
+}
 .nav_comp {
   height: 100px;
   background-color: black;
+  flex-wrap: wrap;
+  
 }
 .saturn-icon {
   height: 70px;
-  margin-right: 20px;
+  width: 100%;
+  max-width: 100%;
 }
 .nav_menu {
-  width: 100vw;
-  margin-right: 20px;
+  flex-grow: unset;
 }
 
 .hideContent {
