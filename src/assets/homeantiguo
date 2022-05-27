@@ -1,0 +1,4 @@
+<h2 class="fs-1 fw-bolder py-3">INGRESA A SA-TOUR-NOW!</h2>
+    <h2 class="fs-2 fw-bolder">O REGÍSTRATE Y EMPIEZA A VIAJAR</h2>
+    <LogInComp class="my-3 py-3" />
+    <SignUpComp class="my-3 py-3" />
