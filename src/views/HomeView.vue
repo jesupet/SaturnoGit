@@ -33,9 +33,6 @@ export default {
 </script>
 
 <style scoped>
-  * {
-    font-family: 'Rubik';
-  }
   .hero_img{
     background-image: url("https://images.ecestaticos.com/bUmnlV7Zm7hheKoEvD_D5ZoLwAg=/0x0:1279x719/1600x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F7b5%2F824%2F4a9%2F7b58244a9a7fa4e9cbb192d166aa1463.jpg");
     height: 60vh;

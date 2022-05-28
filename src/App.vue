@@ -7,6 +7,8 @@
 </template>
 
 <script>
+
+
 import { getFirestore } from "firebase/firestore";
 import { mapActions } from "vuex";
 import NavbarComp from './components/NavbarComp.vue'
@@ -39,7 +41,7 @@ export default {
     padding: 0;
     font-size: 100%;
     font-family: 'Rubik';
-    text-decoration: none;
+    
   }
   .title {
     font-size: 40px;

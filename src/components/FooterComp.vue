@@ -16,11 +16,6 @@ export default {
 </script>
 
 <style scoped>
-  *{
-    color: white;
-    text-align: end;
-    justify-content: center;
-  }
   .footer-cont{
     height: 20vh;
     background-color: black;
@@ -28,6 +23,9 @@ export default {
     padding: 30px;
     border-top: white 1px none;
     display: flex;
+    color: white;
+    text-align: end;
+    justify-content: center;
   }
   .saturn-icon {
     height: 70px;

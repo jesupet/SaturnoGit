@@ -312,6 +312,7 @@ export default new Vuex.Store({
     activateAddToFavourites({ commit }, param1) {
       console.log('Param1 = ' + param1)
       commit('addToFavourites', param1)
+      alert("Agregado a favoritos")
     },
     activateRemoveFromFavourites({ commit }, param1) {
       console.log('Param1 = ' + param1)

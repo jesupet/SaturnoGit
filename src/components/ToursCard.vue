@@ -1,13 +1,20 @@
 <template>
-  <div class="col-12 row pb-4">
+  <div class="col-12 row pb-4 m-0">
     <div class="col-md-4 p-2" v-for="(tour, index) in listTours" :key="index">
-      <div class="card" style="height: 80vh">
-        <div class="img_container">
+      <div class="card mx-4 my-2" style="height: 80vh">
+        <div class="img_container_1">
           <img
-            class="card-img-top img-height img-responsive"
+            class="card-img-top img-height img-responsive tour_img_2"
             alt="Imagen"
             v-bind:src="tour.image_url"
           />
+          <button
+            @click.stop.prevent="activateAddToFavourites([activeUser.email, tour.id])"
+            class="fav_btn"
+            type="button"
+          >
+              <font-awesome-icon icon="fa-solid fa-heart" size="2x" />
+          </button>
         </div>
         <div class="card-body">
           <h5 class="card-title" v-if="tour.available == true">
@@ -19,25 +26,22 @@
             </h5>
             <p style="color: red">No disponible</p>
           </div>
-          <button
-            @click.stop.prevent="
-              activateAddToFavourites([activeUser.email, tour.id])
-            "
-          >
-            AGREGAR A FAVORITOS
-          </button>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            Valor: {{ "$" + tour.price_usd }} USD. (Por persona)
-          </li>
-          <li class="list-group-item">
-            Vacantes disponibles: {{ tour.vacancies - tour.enrrolled }} /
-            Totales: {{ tour.vacancies }}
-          </li>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              Valor: {{ "$" + tour.price_usd }} USD. (Por persona)
+            </li>
+            <li class="list-group-item">
+              Duración: {{ tour.duration_hrs }} horas
+            </li>
+            <li class="list-group-item">
+              Vacantes disponibles: {{ tour.vacancies - tour.enrrolled }} /
+              Totales: {{ tour.vacancies }}
+            </li>
         </ul>
+        </div>
+       
           <button
-            class="btn btn-primary"
+            class="btn btn-primary seemore_btn"
             data-bs-toggle="modal"
             :data-bs-target="'#modal' + tour.id"
             @click.stop.prevent="probando()"
@@ -91,7 +95,50 @@ export default {
   height: 100%;
   overflow: hidden;
 }
-.img_container {
+.img_container_1 {
   height: 20em;
+  position: relative;
+  z-index: 1;
+}
+.card-title {
+  color: #000;
+}
+.tour_img_2 {
+  position: absolute;
+  z-index: 2;
+}
+.fav_btn {
+  position: absolute;
+  z-index: 3;
+  right: 15px;
+  top: 15px;
+  border: 0px transparent;
+  background: transparent;
+  color: white;
+}
+path:hover {
+  color: purple;
+}
+path:focus {
+  color: purple;
+}
+path:active {
+  color: purple;
+}
+.seemore_btn {
+  background-color: purple;
+  border: 0px solid;
+  border-radius: 0px;
+}
+.seemore_btn:hover {
+  background-color: white;
+  border: 1px solid purple;
+  color: purple;
+}
+.seemore_btn:focus {
+  background-color: purple;
+  border: 0px solid;
+  border-radius: 0px;
+  color: #fff;
 }
 </style>
