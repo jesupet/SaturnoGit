@@ -75,6 +75,10 @@ export default new Vuex.Store({
         return user1.currentUser
       }
     },
+    getHighlightedTours(state, getters){
+      const result = getters.getListTours.filter(tour => tour.highlighted == true);
+      return result
+    },
     getFavouritesByUser(state, getters) {
       let activeUserEmail = getters.activeUser.email.toString()
       let listUsers = getters.getListUsers
@@ -188,6 +192,7 @@ export default new Vuex.Store({
       //console.log('param3 es el documento donde está contenido el usuario ' + param3);
       const newFavourite = doc(this.state.myFirestore, "saturnousers", param3);
       updateDoc(newFavourite, { favourites: arrayUnion(param2) });
+      alert('Tour añadido a favoritos')
     },
     removeFromFavourites(state, payload) {
       let [param1, param2] = payload;
@@ -198,6 +203,7 @@ export default new Vuex.Store({
       //console.log('param3 son los usuarios ' + param3);
       const removeFavourite = doc(this.state.myFirestore, "saturnousers", param3);
       updateDoc(removeFavourite, { favourites: arrayRemove(param2) });
+      alert('Tour eliminado de favoritos')
     },
     requestTourInfo(state, payload) {
       let [param1, param2, param3, param4] = payload;
@@ -210,6 +216,7 @@ export default new Vuex.Store({
       //console.log('param5 es el usuario filtrado ' + param5);
       const newTourInfoRequest = doc(this.state.myFirestore, "saturnousers", param5);
       updateDoc(newTourInfoRequest, { infoRequests: arrayUnion({ param1, param2, param3, param4 }) });
+      alert('Solicitud enviada con éxito')
     },
     onReset(event) {
       event.preventDefault()

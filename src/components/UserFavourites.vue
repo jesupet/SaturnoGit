@@ -46,9 +46,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .container {
   width: 95%;
+  color: black;
 }
 
 .displayTour {

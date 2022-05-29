@@ -2,7 +2,7 @@
   <div>
     <nav class="navbar navbar-expand-lg nav_comp navbar-dark">
       <div class="container-fluid my-0">
-        <a class="navbar-brand" to="/">
+        <a class="navbar-brand">
           <img
             src="../assets/saturn_logo.svg"
             class="d-inline-block align-middle saturn-icon"
@@ -30,6 +30,7 @@
                 type="submit"
                 >{{ activeUser.email }}</b-button
               >
+            </li>
             <li class="nav-item">
               <b-button
                 v-if="activeUser != undefined"
@@ -88,6 +89,7 @@ export default {
 *{
   text-decoration: none;
   list-style: none;
+  font-size: large;
 }
 .nav_comp {
   height: 100px;
