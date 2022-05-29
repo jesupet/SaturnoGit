@@ -2,14 +2,14 @@
   <div>
     <nav class="navbar navbar-expand-lg nav_comp navbar-dark">
       <div class="container-fluid my-0">
-        <a class="navbar-brand" to="/">
+        <router-link class="navbar-brand" to="/">
           <img
             src="../assets/saturn_logo.svg"
             class="d-inline-block align-middle saturn-icon"
             alt="Kitten"
             fluid
           />
-        </a>
+        </router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
         </button>

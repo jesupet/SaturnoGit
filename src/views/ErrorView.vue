@@ -10,4 +10,8 @@
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+* {
+    color: #000;
+  }
+</style>
