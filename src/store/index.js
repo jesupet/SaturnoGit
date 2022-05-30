@@ -12,6 +12,8 @@ export default new Vuex.Store({
     listTours: [],
     dataTable: [],
     listUsers: [],
+    onemiData: [],
+    fireballData: [],
     user: { email: "", password: "", firstName: "", lastName: "" },
     fields: [
       {
@@ -75,7 +77,13 @@ export default new Vuex.Store({
         return user1.currentUser
       }
     },
-    getHighlightedTours(state, getters){
+    getOnemiData(state) {
+      return state.onemiData
+    },
+    getFireballData(state) {
+      return state.fireballData
+    },
+    getHighlightedTours(state, getters) {
       const result = getters.getListTours.filter(tour => tour.highlighted == true);
       return result
     },
@@ -242,7 +250,13 @@ export default new Vuex.Store({
       console.log('param1 es el email: ' + subscriberEmail)
       const newFavourite = doc(this.state.myFirestore, "saturnoNewsletter", subscribersList);
       updateDoc(newFavourite, { subscribers: arrayUnion(subscriberEmail) });
-    }
+    },
+    mutateOnemiData: (state, data) => {
+      state.onemiData = data
+    },
+    mutateFireballData: (state, data) => {
+      state.fireballData = data
+    },
   },
   actions: {
     async instanceFirestore({ commit }, fs) {
@@ -329,7 +343,7 @@ export default new Vuex.Store({
       console.log('Param1 = ' + subscriberEmail)
       if (subscriberEmail != undefined) {
         commit('subscribeToNewsletter', subscriberEmail)
-        alert ('Su correo fue registrado correctamente, muchas gracias :)')
+        alert('Su correo fue registrado correctamente, muchas gracias :)')
       } else {
         alert('Correo electrónico no válido, intenta de nuevo')
       }
@@ -338,24 +352,19 @@ export default new Vuex.Store({
       console.log('Param1 = ' + param1)
       commit('requestTourInfo', param1)
     },
-    //async addNewUser() {
-    //  await addDoc(collection(this.state.myFirestore, "saturnousers"), {
-    //    name: this.state.form.name,
-    //    image_url: this.state.form.image_url,
-    //    vacancies: this.state.form.vacancies,
-    //    enrrolled: this.state.form.enrrolled,
-    //    price_usd: this.state.form.price_usd,
-    //    description: this.state.form.description,
-    //    duration: this.state.form.duration,
-    //  }),
-    //   this.state.form.name = undefined
-    //  this.state.form.image_url = undefined
-    //  this.state.form.vacancies = undefined
-    //  this.state.form.enrrolled = undefined
-    //  this.state.form.price_usd = undefined
-    //  this.state.form.description = undefined
-    //  this.state.form.duration = undefined
-    //},
+    async callOnemiData({ commit }) {
+      const URL = `https://chilealerta.com/api/query/?user=saturnot&select=onemi`
+      const data = await fetch(URL).then(response => response.json())
+      console.log(data.onemi)
+      commit('mutateOnemiData', data.onemi)
+    },
+    async callFireballData({ commit }) {
+      const URL = `https://ssd-api.jpl.nasa.gov/sentry.api`
+      const data = await fetch(URL).then(response => response.json())
+      console.log(data)
+      commit('mutateFireballData', data)
+    },
   }
 },
 );
+
