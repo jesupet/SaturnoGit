@@ -13,7 +13,8 @@ export default new Vuex.Store({
     dataTable: [],
     listUsers: [],
     onemiData: [],
-    fireballData: [],
+    baikonurData: [],
+    spaceLaunchData: [],
     user: { email: "", password: "", firstName: "", lastName: "" },
     fields: [
       {
@@ -80,8 +81,11 @@ export default new Vuex.Store({
     getOnemiData(state) {
       return state.onemiData
     },
-    getFireballData(state) {
-      return state.fireballData
+    getBaikonurData(state) {
+      return state.baikonurData
+    },
+    getSpaceLaunchData(state) {
+      return state.spaceLaunchData
     },
     getHighlightedTours(state, getters) {
       const result = getters.getListTours.filter(tour => tour.highlighted == true);
@@ -254,8 +258,11 @@ export default new Vuex.Store({
     mutateOnemiData: (state, data) => {
       state.onemiData = data
     },
-    mutateFireballData: (state, data) => {
-      state.fireballData = data
+    mutateBaikonurData: (state, data) => {
+      state.baikonurData = data
+    },
+    mutateSpaceLaunchData: (state, data) => {
+      state.spaceLaunchData = data
     },
   },
   actions: {
@@ -358,11 +365,17 @@ export default new Vuex.Store({
       console.log(data.onemi)
       commit('mutateOnemiData', data.onemi)
     },
-    async callFireballData({ commit }) {
-      const URL = `https://ssd-api.jpl.nasa.gov/sentry.api`
+    async callBaikonurData({ commit }) {
+      const URL = `https://goweather.herokuapp.com/weather/Baikonur`
       const data = await fetch(URL).then(response => response.json())
       console.log(data)
-      commit('mutateFireballData', data)
+      commit('mutateBaikonurData', data)
+    },
+    async callSpaceLaunchData({ commit }) {
+      const URL = `https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_day.geojson`
+      const data = await fetch(URL).then(response => response.json())
+      console.log(data)
+      commit('mutateSpaceLaunchData', data)
     },
   }
 },

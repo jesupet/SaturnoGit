@@ -23,14 +23,15 @@ export default {
       "getTours",
       "getUsers",
       "callOnemiData",
-      "callFireballData"
+      "callBaikonurData",
+      "callSpaceLaunchData"
     ]),
     initFirestore() {
       this.instanceFirestore(getFirestore);
     },
   },
   computed: {
-    ...mapGetters(["getOnemiData", "getFireballData"]),
+    ...mapGetters(["getOnemiData", "getBaikonurData", "getSpaceLaunchData"]),
   },
   created() {
     this.initFirestore();
@@ -39,7 +40,8 @@ export default {
     this.getTours();
     this.getUsers();
     this.callOnemiData();
-    this.callFireballData();
+    this.callBaikonurData();
+    this.callSpaceLaunchData();
   },
 };
 </script>
