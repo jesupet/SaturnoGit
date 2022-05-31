@@ -10,7 +10,7 @@
     <section class="main-section">
       <b-container>
         <h2 class="title">NUESTROS TOURS DESTACADOS</h2>
-        <HomeTour :listTours="listTours"/>
+        <HomeTour :listTours="getHighlightedTours"/>
       </b-container>
     </section>
     <TypeForm/>
@@ -21,26 +21,27 @@
 
 import HomeTour from '../components/HomeTour.vue'
 import TypeForm from '../components/TypeForm.vue'
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "HomeView",
   components: { TypeForm, HomeTour},
   computed: {
-    ...mapState(["listTours"]),
+    ...mapGetters(["getHighlightedTours"])
   },
 };
 </script>
 
 <style scoped>
   .hero_img{
-    background-image: url("https://images.ecestaticos.com/bUmnlV7Zm7hheKoEvD_D5ZoLwAg=/0x0:1279x719/1600x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F7b5%2F824%2F4a9%2F7b58244a9a7fa4e9cbb192d166aa1463.jpg");
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Saturn_from_Cassini_Orbiter_%282004-10-06%29.jpg/2560px-Saturn_from_Cassini_Orbiter_%282004-10-06%29.jpg");
     height: 60vh;
     background-size: cover;
     background-repeat: no-repeat;
     color: white;
     padding: 50px;
     text-align: right;
+    vertical-align:top;
   }
   
   

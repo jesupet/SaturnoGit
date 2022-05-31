@@ -12,6 +12,9 @@ export default new Vuex.Store({
     listTours: [],
     dataTable: [],
     listUsers: [],
+    onemiData: [],
+    baikonurData: [],
+    spaceLaunchData: [],
     user: { email: "", password: "", firstName: "", lastName: "" },
     fields: [
       {
@@ -74,6 +77,19 @@ export default new Vuex.Store({
       } else {
         return user1.currentUser
       }
+    },
+    getOnemiData(state) {
+      return state.onemiData
+    },
+    getBaikonurData(state) {
+      return state.baikonurData
+    },
+    getSpaceLaunchData(state) {
+      return state.spaceLaunchData
+    },
+    getHighlightedTours(state, getters) {
+      const result = getters.getListTours.filter(tour => tour.highlighted == true);
+      return result
     },
     getFavouritesByUser(state, getters) {
       let activeUserEmail = getters.activeUser.email.toString()
@@ -188,6 +204,7 @@ export default new Vuex.Store({
       //console.log('param3 es el documento donde está contenido el usuario ' + param3);
       const newFavourite = doc(this.state.myFirestore, "saturnousers", param3);
       updateDoc(newFavourite, { favourites: arrayUnion(param2) });
+      alert('Tour añadido a favoritos')
     },
     removeFromFavourites(state, payload) {
       let [param1, param2] = payload;
@@ -198,6 +215,7 @@ export default new Vuex.Store({
       //console.log('param3 son los usuarios ' + param3);
       const removeFavourite = doc(this.state.myFirestore, "saturnousers", param3);
       updateDoc(removeFavourite, { favourites: arrayRemove(param2) });
+      alert('Tour eliminado de favoritos')
     },
     requestTourInfo(state, payload) {
       let [param1, param2, param3, param4] = payload;
@@ -210,6 +228,7 @@ export default new Vuex.Store({
       //console.log('param5 es el usuario filtrado ' + param5);
       const newTourInfoRequest = doc(this.state.myFirestore, "saturnousers", param5);
       updateDoc(newTourInfoRequest, { infoRequests: arrayUnion({ param1, param2, param3, param4 }) });
+      alert('Solicitud enviada con éxito')
     },
     onReset(event) {
       event.preventDefault()
@@ -235,7 +254,16 @@ export default new Vuex.Store({
       console.log('param1 es el email: ' + subscriberEmail)
       const newFavourite = doc(this.state.myFirestore, "saturnoNewsletter", subscribersList);
       updateDoc(newFavourite, { subscribers: arrayUnion(subscriberEmail) });
-    }
+    },
+    mutateOnemiData: (state, data) => {
+      state.onemiData = data
+    },
+    mutateBaikonurData: (state, data) => {
+      state.baikonurData = data
+    },
+    mutateSpaceLaunchData: (state, data) => {
+      state.spaceLaunchData = data
+    },
   },
   actions: {
     async instanceFirestore({ commit }, fs) {
@@ -322,7 +350,7 @@ export default new Vuex.Store({
       console.log('Param1 = ' + subscriberEmail)
       if (subscriberEmail != undefined) {
         commit('subscribeToNewsletter', subscriberEmail)
-        alert ('Su correo fue registrado correctamente, muchas gracias :)')
+        alert('Su correo fue registrado correctamente, muchas gracias :)')
       } else {
         alert('Correo electrónico no válido, intenta de nuevo')
       }
@@ -331,24 +359,25 @@ export default new Vuex.Store({
       console.log('Param1 = ' + param1)
       commit('requestTourInfo', param1)
     },
-    //async addNewUser() {
-    //  await addDoc(collection(this.state.myFirestore, "saturnousers"), {
-    //    name: this.state.form.name,
-    //    image_url: this.state.form.image_url,
-    //    vacancies: this.state.form.vacancies,
-    //    enrrolled: this.state.form.enrrolled,
-    //    price_usd: this.state.form.price_usd,
-    //    description: this.state.form.description,
-    //    duration: this.state.form.duration,
-    //  }),
-    //   this.state.form.name = undefined
-    //  this.state.form.image_url = undefined
-    //  this.state.form.vacancies = undefined
-    //  this.state.form.enrrolled = undefined
-    //  this.state.form.price_usd = undefined
-    //  this.state.form.description = undefined
-    //  this.state.form.duration = undefined
-    //},
+    async callOnemiData({ commit }) {
+      const URL = `https://chilealerta.com/api/query/?user=saturnot&select=onemi`
+      const data = await fetch(URL).then(response => response.json())
+      console.log(data.onemi)
+      commit('mutateOnemiData', data.onemi)
+    },
+    async callBaikonurData({ commit }) {
+      const URL = `https://goweather.herokuapp.com/weather/Baikonur`
+      const data = await fetch(URL).then(response => response.json())
+      console.log(data)
+      commit('mutateBaikonurData', data)
+    },
+    async callSpaceLaunchData({ commit }) {
+      const URL = `https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_day.geojson`
+      const data = await fetch(URL).then(response => response.json())
+      console.log(data)
+      commit('mutateSpaceLaunchData', data)
+    },
   }
 },
 );
+

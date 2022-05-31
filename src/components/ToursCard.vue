@@ -8,12 +8,14 @@
             alt="Imagen"
             v-bind:src="tour.image_url"
           />
-          <button
-            @click.stop.prevent="activateAddToFavourites([activeUser.email, tour.id])"
+          <button v-if="activeUser != undefined"
+            @click.stop.prevent="
+              activateAddToFavourites([activeUser.email, tour.id])
+            "
             class="fav_btn"
             type="button"
           >
-              <font-awesome-icon icon="fa-solid fa-heart" size="2x" />
+            <font-awesome-icon icon="fa-solid fa-heart" size="2x" />
           </button>
         </div>
         <div class="card-body">
@@ -37,23 +39,13 @@
               Vacantes disponibles: {{ tour.vacancies - tour.enrrolled }} /
               Totales: {{ tour.vacancies }}
             </li>
-        </ul>
+          </ul>
         </div>
-       
-          <button
-            class="btn btn-primary seemore_btn"
-            data-bs-toggle="modal"
-            :data-bs-target="'#modal' + tour.id"
-            @click.stop.prevent="probando()"
-          >
-            Ver más
-          </button>
-          <DetailsModal
-            :idKey="tour.id"
-            :name="tour.name"
-            :index="index"
-            :description="tour.description"
-          />
+        <DetailsModal
+          class="btn btn-primary seemore_btn p-0"
+          :idKey="tour.id"
+          :tour="tour"
+        />
       </div>
     </div>
   </div>

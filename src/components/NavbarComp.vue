@@ -30,6 +30,7 @@
                 type="submit"
                 >{{ activeUser.email }}</b-button
               >
+            </li>
             <li class="nav-item">
               <b-button
                 v-if="activeUser != undefined"
@@ -88,6 +89,7 @@ export default {
 *{
   text-decoration: none;
   list-style: none;
+  font-size: large;
 }
 .nav_comp {
   height: 100px;

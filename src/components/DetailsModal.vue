@@ -1,52 +1,59 @@
 <template>
-  <div
-    class="modal fade"
-    :id="'modalDetails'+idKey"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">
-            Detalles del tour: {{ name }}
-          </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <p>
-            {{description}}
-          </p>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
+  <div>
+    <b-button v-b-modal="'modalDetails' + idKey" class="seemore_btn"
+      >Ver más</b-button
+    >
+
+    <b-modal :id="'modalDetails' + idKey" :title="tour.name" v-model="show">
+      <b-img :src="tour.image_url" fluid alt="Responsive image"></b-img>
+      <p class="my-4">{{ tour.description }}</p>
+      <template #modal-footer>
+        <div class="w-100">
+          <b-button
+            variant="primary"
+            size="sm"
+            class="float-right"
+            @click="show = false"
           >
             Cerrar
-          </button>
+          </b-button>
         </div>
-      </div>
-    </div>
+      </template>
+    </b-modal>
   </div>
 </template>
 
 <script>
-
 export default {
   name: "DetailsModal",
+  data() {
+    return {
+      show: false,
+    };
+  },
   props: {
-    name: String,
     idKey: String,
-    index: Number,
-    description: String,
+    tour: Object,
   },
 };
 </script>
+
+<style scoped>
+.seemore_btn {
+  background-color: purple;
+  border: 0px solid;
+  border-radius: 0px;
+  width: 100%;
+}
+.seemore_btn:hover {
+  background-color: white;
+  border: 1px solid purple;
+  color: purple;
+}
+.seemore_btn:focus {
+  background-color: purple;
+  border: 0px solid;
+  border-radius: 0px;
+  color: #fff;
+}
+</style>
