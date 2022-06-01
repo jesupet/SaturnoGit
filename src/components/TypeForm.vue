@@ -12,13 +12,12 @@
           aria-describedby="button-addon2"
           required
         />
-        <button @click.prevent="activateNewsletterSub(subscriberEmail)"><font-awesome-icon icon="fa-solid fa-arrow-right" size="3x" inverse/></button>
-        <!--<input
-          type="submit"
-          value="Suscribirme"
-          class="mx-2"
-          @click.prevent="activateNewsletterSub(subscriberEmail)"
-        />-->
+        <button @click.prevent="activateNewsletterSub(subscriberEmail), $bvToast.show('example-toast')">
+          <font-awesome-icon icon="fa-solid fa-arrow-right" size="3x" inverse/>
+        </button>
+        <b-toast id="example-toast" title="BootstrapVue" static no-auto-hide>
+          Hello, world! This is a toast message.
+        </b-toast>
       </form>
     </div>
   </div>
