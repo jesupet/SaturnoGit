@@ -350,7 +350,7 @@ export default new Vuex.Store({
       console.log('Param1 = ' + subscriberEmail)
       if (subscriberEmail != undefined) {
         commit('subscribeToNewsletter', subscriberEmail)
-        alert('Su correo fue registrado correctamente, muchas gracias :)')
+        //alert('Su correo fue registrado correctamente, muchas gracias :)')
       } else {
         alert('Correo electrónico no válido, intenta de nuevo')
       }
