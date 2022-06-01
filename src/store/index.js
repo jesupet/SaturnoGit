@@ -360,10 +360,10 @@ export default new Vuex.Store({
       commit('requestTourInfo', param1)
     },
     async callOnemiData({ commit }) {
-      const URL = `https://chilealerta.com/api/query/?user=saturnot&select=onemi`
+      const URL = `https://api.nasa.gov/neo/rest/v1/feed?start_date=2022-05-31E&end_date=2022-06-05&api_key=OaGIu1rtXVFHo5u3Nh04arwUua6VCffTerY8mSBX`
       const data = await fetch(URL).then(response => response.json())
-      console.log(data.onemi)
-      commit('mutateOnemiData', data.onemi)
+      console.log(data)
+      commit('mutateOnemiData', data)
     },
     async callBaikonurData({ commit }) {
       const URL = `https://goweather.herokuapp.com/weather/Baikonur`
@@ -372,7 +372,7 @@ export default new Vuex.Store({
       commit('mutateBaikonurData', data)
     },
     async callSpaceLaunchData({ commit }) {
-      const URL = `https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_day.geojson`
+      const URL = `https://api.sbif.cl/api-sbifv3/recursos_api/dolar?apikey=4ac9912c9934d28e378d474d52e70a890360a41b&formato=json`
       const data = await fetch(URL).then(response => response.json())
       console.log(data)
       commit('mutateSpaceLaunchData', data)
@@ -381,3 +381,6 @@ export default new Vuex.Store({
 },
 );
 
+//4ac9912c9934d28e378d474d52e70a890360a41b
+//{mode: 'no-cors'}
+//https://api.nasa.gov/planetary/apod?api_key=OaGIu1rtXVFHo5u3Nh04arwUua6VCffTerY8mSBX
