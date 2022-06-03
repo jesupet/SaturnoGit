@@ -67,6 +67,10 @@ export default new Vuex.Store({
     },
     show: true,
     editedIndex: '',
+    alert: {
+      message: "",
+      variant: "",
+    }
   },
   getters: {
     activeUser() {
@@ -173,8 +177,13 @@ export default new Vuex.Store({
     totalTours(state) {
       let result = state.listTours.length
       return result
-    }
+    },
+    getAlertData(state) {
+      console.log(state.alert)
+      return state.alert
+    },
   },
+  
   mutations: {
     instanceFirestore(state, fs) {
       state.myFirestore = fs;
@@ -204,7 +213,7 @@ export default new Vuex.Store({
       //console.log('param3 es el documento donde está contenido el usuario ' + param3);
       const newFavourite = doc(this.state.myFirestore, "saturnousers", param3);
       updateDoc(newFavourite, { favourites: arrayUnion(param2) });
-      alert('Tour añadido a favoritos')
+      //alert('Tour añadido a favoritos')
     },
     removeFromFavourites(state, payload) {
       let [param1, param2] = payload;
@@ -247,13 +256,14 @@ export default new Vuex.Store({
         this.state.show = true
       })
     },
-    subscribeToNewsletter(state, payload) {
-      console.log(payload)
-      let subscriberEmail = payload.toString()
+    subscribeToNewsletter(state, subscriberEmail) {
       let subscribersList = 'ieDmCBUyRdhxtUBkRogh'
-      console.log('param1 es el email: ' + subscriberEmail)
       const newFavourite = doc(this.state.myFirestore, "saturnoNewsletter", subscribersList);
-      updateDoc(newFavourite, { subscribers: arrayUnion(subscriberEmail) });
+      updateDoc(newFavourite, { subscribers: arrayUnion(subscriberEmail.toString()) });
+    },
+    dataToAlert(state, data) {
+      state.alert.message = data.message
+      state.alert.variant = data.variant
     },
     mutateOnemiData: (state, data) => {
       state.onemiData = data
@@ -339,8 +349,9 @@ export default new Vuex.Store({
     },
     activateAddToFavourites({ commit }, param1) {
       console.log('Param1 = ' + param1)
-      commit('addToFavourites', param1)
-      alert("Agregado a favoritos")
+      let color = ""
+      commit('addToFavourites', param1, color)
+      //alert("Agregado a favoritos")
     },
     activateRemoveFromFavourites({ commit }, param1) {
       console.log('Param1 = ' + param1)
@@ -348,12 +359,17 @@ export default new Vuex.Store({
     },
     activateNewsletterSub({ commit }, subscriberEmail) {
       console.log('Param1 = ' + subscriberEmail)
+      let message = ""
+      let variant = ""
       if (subscriberEmail != undefined) {
+        message ="Su correo fue registrado correctamente, muchas gracias :)"
+        variant = "success"
         commit('subscribeToNewsletter', subscriberEmail)
-        //alert('Su correo fue registrado correctamente, muchas gracias :)')
       } else {
-        alert('Correo electrónico no válido, intenta de nuevo')
+        message ="Correo electrónico no válido, intenta de nuevo"
+        variant = "danger"
       }
+      commit('dataToAlert', {message, variant})
     },
     activateRequestTourInfo({ commit }, param1) {
       console.log('Param1 = ' + param1)

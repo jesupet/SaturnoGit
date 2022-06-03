@@ -16,13 +16,13 @@
           
           class="position-fixed fixed-top m-0 rounded-0"
           style="z-index: 2000;"
-          variant="success"
+          :variant="getAlertData.variant"
           :show="dismissCountDown"
           
           fade
           @dismiss-count-down="countDownChanged"
         >
-          Correo registrado exitosamente!
+          {{getAlertData.message}}
         </b-alert>
         <button @click.prevent="activateNewsletterSub(subscriberEmail)" @click="showAlert">
           <font-awesome-icon icon="fa-solid fa-arrow-right" size="3x" inverse/>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "TypeForm",
@@ -45,6 +45,9 @@ export default {
       dismissSecs: 5,
       dismissCountDown: 0,
     };
+  },
+  computed: {
+    ...mapGetters(["getAlertData"])
   },
   methods: {
     ...mapActions(["activateNewsletterSub",]),
@@ -60,7 +63,7 @@ export default {
 
 <style scoped>
 .input_section {
-  background-image: url("https://images.ecestaticos.com/bUmnlV7Zm7hheKoEvD_D5ZoLwAg=/0x0:1279x719/1600x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F7b5%2F824%2F4a9%2F7b58244a9a7fa4e9cbb192d166aa1463.jpg");
+  background-image: url("https://cdn.mos.cms.futurecdn.net/owm4oa3hXUG58mka7hPvfP.jpg");
   background-position: center;
   padding-top: 60px;
   padding-bottom: 60px;

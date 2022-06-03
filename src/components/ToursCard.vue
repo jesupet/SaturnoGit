@@ -12,11 +12,24 @@
             @click.stop.prevent="
               activateAddToFavourites([activeUser.email, tour.id])
             "
+            @click="showAlert"
             class="fav_btn"
             type="button"
           >
             <font-awesome-icon icon="fa-solid fa-heart" size="2x" />
           </button>
+          <b-alert
+          
+          class="position-fixed fixed-top m-0 rounded-0"
+          style="z-index: 2000;"
+          variant="info"
+          :show="dismissCountDown"
+          
+          fade
+          @dismiss-count-down="countDownChanged"
+        >
+          El tour ha sido agregado a tu favoritos. Para ver la lista completa haz <router-link to="/users" class="alert-link">click aquí</router-link>
+        </b-alert>
         </div>
         <div class="card-body">
           <h5 class="card-title" v-if="tour.available == true">
@@ -57,6 +70,12 @@ import DetailsModal from "../components/DetailsModal.vue";
 
 export default {
   name: "ToursCard",
+  data() {
+    return {
+      dismissSecs: 5,
+      dismissCountDown: 0,
+    }
+  },
   props: {
     listTours: Array,
   },
@@ -64,6 +83,12 @@ export default {
     DetailsModal,
   },
   methods: {
+    countDownChanged(dismissCountDown) {
+        this.dismissCountDown = dismissCountDown
+      },
+      showAlert() {
+        this.dismissCountDown = this.dismissSecs
+      },
     ...mapActions([
       "getUsers",
       "activateAddToFavourites",
@@ -73,6 +98,7 @@ export default {
     probando() {
       console.log("apretaste el botón");
     },
+    
   },
   computed: {
     ...mapGetters(["activeUser"]),
@@ -132,5 +158,8 @@ path:active {
   border: 0px solid;
   border-radius: 0px;
   color: #fff;
+}
+.toast:not(.show) {
+   display: block;
 }
 </style>
