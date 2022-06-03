@@ -1,5 +1,11 @@
 <template>
   <div class="col-12 row pb-4 m-0">
+    <!--MODAL PARA SUGERIR LOGIN Y SIGNUP SI EL USUARIO NO ESTÁ LOGUEADO-->
+    <b-modal v-model="modalShow">
+      <LogInModal />
+      <SignUpModal />
+    </b-modal>
+    <!--FIN MODAL-->
     <div class="col-md-4 p-2" v-for="(tour, index) in listTours" :key="index">
       <div class="card mx-4 my-2" style="height: 80vh">
         <div class="img_container_1">
@@ -8,9 +14,9 @@
             alt="Imagen"
             v-bind:src="tour.image_url"
           />
-          <button v-if="activeUser != undefined"
+          <button
             @click.stop.prevent="
-              activateAddToFavourites([activeUser.email, tour.id])
+              checkLoggedUser([activeUser, activeUser.email, tour.id])
             "
             class="fav_btn"
             type="button"
@@ -54,14 +60,23 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import DetailsModal from "../components/DetailsModal.vue";
+import LogInModal from "./auth/LogInModal.vue";
+import SignUpModal from "./auth/SignUpModal.vue";
 
 export default {
   name: "ToursCard",
+  data() {
+    return {
+      modalShow: false,
+    };
+  },
   props: {
     listTours: Array,
   },
   components: {
     DetailsModal,
+    LogInModal,
+    SignUpModal,
   },
   methods: {
     ...mapActions([
@@ -69,13 +84,33 @@ export default {
       "activateAddToFavourites",
       "activateAddToFavourites_2",
       "activateRemoveFromFavourites",
+      //activateAddToFavourites([activeUser.email, tour.id])
     ]),
-    probando() {
-      console.log("apretaste el botón");
+    checkLoggedUser(data1) {
+      console.log(data1);
+      let [userStatus, userEmail, TourID] = data1;
+      console.log({ userStatus });
+      console.log({ userEmail });
+      console.log({ TourID });
+      if (userStatus == false) {
+        this.modalShow = !this.modalShow;
+      } else {
+        this.activateAddToFavourites([userEmail, TourID]);
+      }
     },
   },
   computed: {
     ...mapGetters(["activeUser"]),
+    activeUserNow() {
+      console.log(this.activeUser);
+      return this.activeUser;
+    },
+  },
+  beforeMount() {
+    this.activeUser;
+  },
+  mounted() {
+    this.activeUserNow;
   },
 };
 </script>

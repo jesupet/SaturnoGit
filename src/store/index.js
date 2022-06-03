@@ -73,7 +73,7 @@ export default new Vuex.Store({
       let { currentUser } = getAuth()
       let user1 = { currentUser }
       if (user1.currentUser == undefined) {
-        return undefined
+        return false
       } else {
         return user1.currentUser
       }
@@ -209,9 +209,6 @@ export default new Vuex.Store({
       let [param1, param2] = payload;
       let userProfile = this.getters.getListUsers.find(element => element.user_email == param1)
       let param3 = userProfile.id.toString()
-      //console.log('param1 es el email: ' + param1);
-      //console.log('param2 es el ID del tour ' + param2);
-      //console.log('param3 es el documento donde está contenido el usuario ' + param3);
       const newFavourite = doc(this.state.myFirestore, "saturnousers", param3);
       updateDoc(newFavourite, { favourites: arrayUnion(param2) });
       alert('Tour añadido a favoritos')
@@ -220,9 +217,6 @@ export default new Vuex.Store({
       let [param1, param2] = payload;
       let userProfile = this.getters.getListUsers.find(element => element.user_email == param1)
       let param3 = userProfile.id.toString()
-      //console.log('param1 es el email: ' + param1);
-      //console.log('param2 es el ID del tour ' + param2);
-      //console.log('param3 son los usuarios ' + param3);
       const removeFavourite = doc(this.state.myFirestore, "saturnousers", param3);
       updateDoc(removeFavourite, { favourites: arrayRemove(param2) });
       alert('Tour eliminado de favoritos')
@@ -348,9 +342,7 @@ export default new Vuex.Store({
       context.commit("mutatePassword", inputPassword);
     },
     activateAddToFavourites({ commit }, param1) {
-      console.log('Param1 = ' + param1)
       commit('addToFavourites', param1)
-      alert("Agregado a favoritos")
     },
     activateRemoveFromFavourites({ commit }, param1) {
       console.log('Param1 = ' + param1)
