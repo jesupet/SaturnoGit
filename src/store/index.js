@@ -96,7 +96,17 @@ export default new Vuex.Store({
       let listUsers = getters.getListUsers
       //let listTours = getters.getListTours
       const activeUserFavourites = listUsers.find(element => element.user_email == activeUserEmail)
-      return activeUserFavourites.favourites
+      let result = []
+      activeUserFavourites.favourites.map((fav) => {
+        console.log({ fav })
+        state.listTours.map((tour) => {
+          if (tour.id == fav) {
+            result.push(tour)
+          }
+        })
+      })
+      console.log({ result })
+      return result
     },
     getUsername(state) {
       return state.user.name
