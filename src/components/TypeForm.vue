@@ -12,12 +12,23 @@
           aria-describedby="button-addon2"
           required
         />
-        <button @click.prevent="activateNewsletterSub(subscriberEmail), $bvToast.show('example-toast')">
+        <b-alert
+          
+          class="position-fixed fixed-top m-0 rounded-0"
+          style="z-index: 2000;"
+          variant="success"
+          :show="dismissCountDown"
+          
+          fade
+          @dismiss-count-down="countDownChanged"
+        >
+          Correo registrado exitosamente!
+        </b-alert>
+        <button @click.prevent="activateNewsletterSub(subscriberEmail)" @click="showAlert">
           <font-awesome-icon icon="fa-solid fa-arrow-right" size="3x" inverse/>
         </button>
-        <b-toast id="example-toast" title="BootstrapVue" static no-auto-hide>
-          Hello, world! This is a toast message.
-        </b-toast>
+        
+       
       </form>
     </div>
   </div>
@@ -31,10 +42,18 @@ export default {
   data() {
     return {
       subscriberEmail: undefined,
+      dismissSecs: 5,
+      dismissCountDown: 0,
     };
   },
   methods: {
     ...mapActions(["activateNewsletterSub",]),
+    countDownChanged(dismissCountDown) {
+        this.dismissCountDown = dismissCountDown
+      },
+      showAlert() {
+        this.dismissCountDown = this.dismissSecs
+      }
   },
 };
 </script>
