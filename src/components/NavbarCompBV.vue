@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="dark">
+    <b-navbar toggleable="lg" type="dark" class="nav_comp">
       <a class="navbar-brand">
         <img
           src="../assets/saturn_logo.svg"
@@ -108,5 +108,8 @@ export default {
 
 .hideContent {
   display: none;
+}
+#nav-collapse {
+  justify-content: right;
 }
 </style>

@@ -34,7 +34,7 @@ export default {
 
 <style scoped>
   .hero_img{
-    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Saturn_from_Cassini_Orbiter_%282004-10-06%29.jpg/2560px-Saturn_from_Cassini_Orbiter_%282004-10-06%29.jpg");
+    background-image: url("https://cdn.mos.cms.futurecdn.net/owm4oa3hXUG58mka7hPvfP.jpg");
     height: 60vh;
     background-size: cover;
     background-repeat: no-repeat;

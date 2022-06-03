@@ -15,6 +15,8 @@ import { faArrowRight, faHeart, faBookmark } from '@fortawesome/free-solid-svg-i
 /* import font awesome icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
+import 'animate.css';
+
 /* add icons to the library */
 library.add(faArrowRight, faHeart, faBookmark)
 
