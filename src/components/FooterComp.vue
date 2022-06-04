@@ -1,11 +1,13 @@
 <template>
-  <footer class="footer-cont">
-    <img
-          src="../assets/saturn_logo.svg"
-          class="d-inline-block align-middle saturn-icon"
-        />
-    <p class="mt-4">Este proyecto fue elaborado por: Sebastián Castillo y María Jesús Petour</p>
-  </footer>
+  <div d-flex flex-column min-vh-100>
+    <footer class="footer-cont">
+      <img
+            src="../assets/saturn_logo.svg"
+            class="d-inline-block align-middle saturn-icon"
+          />
+      <p class="mt-4">Este proyecto fue elaborado por: Sebastián Castillo y María Jesús Petour</p>
+    </footer>
+  </div>
 </template>
 
 <script>
@@ -26,6 +28,10 @@ export default {
     color: white;
     text-align: end;
     justify-content: center;
+    margin-top: auto;
+    position:relative;
+    bottom: 0;
+    width: 100%
   }
   .saturn-icon {
     height: 70px;

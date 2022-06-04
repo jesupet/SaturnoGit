@@ -38,7 +38,7 @@
             @click.stop.prevent="logOutUser"
             to="/"
           >
-            <img src="../assets/icons/door-closed.svg" alt="Cerrar sesión" />
+            <font-awesome-icon icon="fa-solid fa-arrow-right-from-bracket" />
           </b-button>
           <div v-if="activeUser == undefined" class="d-inline">
             <LogInModal class="d-inline" />
