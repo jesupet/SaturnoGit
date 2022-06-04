@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" class="nav_comp">
+    <b-navbar toggleable="lg" type="dark" class="nav_comp fixed-top">
       <a class="navbar-brand">
         <img
           src="../assets/saturn_logo.svg"
@@ -11,7 +11,7 @@
       </a>
       <b-navbar-brand class="mx-4" to="/">SA-TOUR-NOW!</b-navbar-brand>
 
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-navbar-toggle target="nav-collapse" class="toggle_menu"></b-navbar-toggle>
 
       <b-collapse class="navbar-nav m-0" id="nav-collapse" is-nav>
         <b-navbar-nav>
@@ -38,7 +38,7 @@
             @click.stop.prevent="logOutUser"
             to="/"
           >
-            <img src="../assets/icons/door-closed.svg" alt="Cerrar sesión" />
+            <font-awesome-icon icon="fa-solid fa-arrow-right-from-bracket" />
           </b-button>
           <div v-if="activeUser == false" class="d-inline">
             <LogInModal class="d-inline" />
@@ -94,8 +94,9 @@ export default {
 }
 .nav_comp {
   height: 100px;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 20%);
   flex-wrap: wrap;
+  
 }
 .saturn-icon {
   height: 70px;
@@ -111,5 +112,10 @@ export default {
 }
 #nav-collapse {
   justify-content: right;
+}
+.show{
+  background-color: black;
+  padding-bottom: 20px;
+  color: white;
 }
 </style>

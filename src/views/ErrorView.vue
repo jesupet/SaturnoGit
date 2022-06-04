@@ -1,17 +1,38 @@
 <template>
-  <div class="col-12">
-    <div class="align-text-middle text-center mt-5">
-      <h1 class="fw-bolder">ERROR</h1>
+  <div>
+    <section class="align-text-middle text-center error_section">
+      <h1 class="title">ERROR</h1>
       <h2>
         TAL PARECE QUE NO ESTÁS AUTORIZADO PARA ESTAR AQUÍ
       </h2>
-      <h2><router-link to="/">VUELVE AL MENÚ PRINCIPAL</router-link></h2>
-    </div>
+      <div>
+        <img img-responsive class="face_img" src="https://www.dictionary.com/e/wp-content/uploads/2018/03/Thinking_Face_Emoji-Emoji-Island.png" alt="excepctical face">
+      </div>
+      <b-button variant="warning" class="my-3">
+        <router-link to="/">VUELVE AL MENÚ PRINCIPAL</router-link>
+      </b-button>
+    </section>
   </div>
 </template>
 
 <style scoped>
-* {
-    color: #000;
-  }
+.error_section {
+  background-image: url("https://cdn.mos.cms.futurecdn.net/owm4oa3hXUG58mka7hPvfP.jpg");
+  margin-top: 0%;
+  padding: 10px;
+  color: #fff;
+}
+.title {
+  font-weight: 700;
+  padding-top: 100px;
+}
+.face_img {
+  width: 300px;
+  padding: 20px;
+
+}
+a {
+  text-decoration: none;
+  color: inherit
+}
 </style>

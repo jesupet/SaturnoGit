@@ -8,7 +8,16 @@
       v-b-modal="'LogInModal'"
       >Ingresa</b-button
     >
-    <b-modal id="LogInModal" ref="modal" title="Ingresa a Sa-Tour-Now!" hide-footer>
+    <b-modal 
+      id="LogInModal" 
+      ref="modal" 
+      title="Ingresa a Sa-Tour-Now!"
+      body-bg-variant="dark"
+      body-text-variant="light"
+      header-bg-variant="dark"
+      header-text-variant="light" 
+      hide-footer
+      hide-header-close>
       <form ref="form">
         <b-form-group
           label="Usuario"
@@ -44,7 +53,7 @@
             logInUser();
             hideModal;
           "
-          variant="outline-primary"
+          class="sign_btn"
           >Ingresar</b-button
         >
       </div>
@@ -80,4 +89,22 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.sign_btn {
+  background-color: purple;
+  border: 0px solid;
+  color: white;
+}
+.sign_btn:hover {
+  background-color: white;
+  border: 1px solid purple;
+  color: purple;
+}
+.sign_btn:focus {
+  background-color: purple;
+  border: 0px solid;
+  border-radius: 0px;
+  color: #fff;
+}
+
+</style>

@@ -7,10 +7,15 @@
     </b-modal>
     <!--FIN MODAL-->
     <div class="col-md-4 p-2" v-for="(tour, index) in listTours" :key="index">
-      <div class="card mx-4 my-2" style="height: 80vh">
+      <div class="card mx-4 my-2 card_container">
+        <div class="availability" v-if="tour.available == false">
+          <p class="my-3">
+            No disponible
+          </p> 
+        </div>
         <div class="img_container_1">
           <img
-            class="card-img-top img-height img-responsive tour_img_2"
+            class="card-img-top img-height img-fluid"
             alt="Imagen"
             v-bind:src="tour.image_url"
           />
@@ -38,25 +43,19 @@
         </b-alert>
         </div>
         <div class="card-body">
-          <h5 class="card-title" v-if="tour.available == true">
+          <h5 class="card-title">
             {{ tour.name }}
           </h5>
-          <div v-else>
-            <h5 class="card-title">
-              {{ tour.name }}
-            </h5>
-            <p style="color: red">No disponible</p>
-          </div>
-          <ul class="list-group list-group-flush">
+          <hr style="color: white">
+          <ul class="list-group">
             <li class="list-group-item">
-              Valor: {{ "$" + tour.price_usd }} USD. (Por persona)
+              <span style="color: rgb(238, 0, 238)">Valor:</span> {{ "$" + tour.price_usd }} USD. (Por persona)
             </li>
             <li class="list-group-item">
-              Duración: {{ tour.duration_hrs }} horas
+             <span style="color: rgb(238, 0, 238)">Duración:</span> {{ tour.duration_hrs }} horas
             </li>
             <li class="list-group-item">
-              Vacantes disponibles: {{ tour.vacancies - tour.enrrolled }} /
-              Totales: {{ tour.vacancies }}
+              <span style="color: rgb(238, 0, 238)">Vacantes disponibles:</span> {{ tour.vacancies - tour.enrrolled }} / {{ tour.vacancies }}
             </li>
           </ul>
         </div>
@@ -137,23 +136,24 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.img-height {
-  max-height: 20em;
-  max-width: 100%;
-  height: 100%;
-  overflow: hidden;
+.availability {
+  position: absolute;
+  z-index: 10;
+  color: white;
+  text-align: center;
+  background-color: rgb(165, 0, 0);
+  border: #fff dashed 1px;
+  width:120%;
+  top: 130px;
+  left: -50px;
+  transform: rotate(-30deg)
 }
 .img_container_1 {
-  height: 20em;
-  position: relative;
-  z-index: 1;
+  height: 60%;
+  overflow: hidden;
 }
-.card-title {
-  color: #000;
-}
-.tour_img_2 {
-  position: absolute;
-  z-index: 2;
+.img-height {
+  min-height: 100%;
 }
 .fav_btn {
   position: absolute;
@@ -192,4 +192,19 @@ path:active {
 .toast:not(.show) {
    display: block;
 }
+.card_container {
+  height: 80vh;
+  position: relative;
+  z-index:0;
+}
+.list-group-item, .card_container {
+  background-color: #000;
+  color: #fff;
+}
+.card-title {
+  font-size: 25px;
+  text-align: center;
+  padding: 10px 0px;
+}
+
 </style>

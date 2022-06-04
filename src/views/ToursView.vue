@@ -23,8 +23,11 @@ export default {
 
 <style scoped>
 .card-container {
-  background-color: black;
+  background-image: url("https://cdn.mos.cms.futurecdn.net/owm4oa3hXUG58mka7hPvfP.jpg");
   margin: 0%;
   padding: 10px;
+}
+.title {
+  padding-top: 100px;
 }
 </style>

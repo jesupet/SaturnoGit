@@ -44,6 +44,9 @@ export default {
     height: 500px;
     margin-bottom: 20px;
     justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0px 0px 70px #2f0094;
+
   }
   .tour_img {
     border-radius: 50%;
