@@ -22,7 +22,7 @@
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
           <b-button
-            v-if="activeUser != undefined"
+            v-if="activeUser != false"
             variant="light"
             size="sm"
             class="my-2 my-sm-0"
@@ -30,7 +30,7 @@
             >{{ activeUser.email }}</b-button
           >
           <b-button
-            v-if="activeUser != undefined"
+            v-if="activeUser != false"
             variant="warning"
             size="sm"
             class="my-2 mx-2 my-sm-0"
@@ -40,7 +40,7 @@
           >
             <img src="../assets/icons/door-closed.svg" alt="Cerrar sesión" />
           </b-button>
-          <div v-if="activeUser == undefined" class="d-inline">
+          <div v-if="activeUser == false" class="d-inline">
             <LogInModal class="d-inline" />
             <SignUpModal class="d-inline" />
           </div>
@@ -68,7 +68,7 @@ export default {
     ...mapGetters(["activeUser"]),
     logInSignUpComp(activeUser) {
       console.log(activeUser);
-      if (activeUser != undefined) {
+      if (activeUser != false) {
         return "d-block";
       } else {
         return "d-none";
