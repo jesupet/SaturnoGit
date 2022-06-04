@@ -37,14 +37,9 @@
         </b-alert>
         </div>
         <div class="card-body">
-          <h5 class="card-title" v-if="tour.available == true">
+          <h5 class="card-title">
             {{ tour.name }}
           </h5>
-          <div v-else>
-            <h5 class="card-title">
-              {{ tour.name }}
-            </h5>
-          </div>
           <hr style="color: white">
           <ul class="list-group">
             <li class="list-group-item">

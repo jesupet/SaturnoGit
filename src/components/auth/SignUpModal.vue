@@ -9,28 +9,34 @@
     >
       Regístrate
     </b-button>
-    <b-modal id="SignUpModal" ref="modal" title="Regístrate a Sa-Tour-Now!" hide-footer>
+    <b-modal 
+      id="SignUpModal" 
+      ref="modal" 
+      title="Regístrate a Sa-Tour-Now!" 
+      hide-footer
+      body-bg-variant="dark"
+      body-text-variant="light"
+      header-bg-variant="dark"
+      header-text-variant="light"
+      hide-header-close
+    >
       <form ref="form">
         <b-form-group
-          label="Datos personales"
           label-for="Usuario-DatosPersonales"
-          invalid-feedback="Se requieren su primer nombre y primer apellido"
         >
-          <p>Nombre:</p>
           <b-form-input
-            :placeholder="'Ingrese su nombre'"
+            :placeholder="'Nombre'"
             type="text"
-            class="form-control"
+            class="form-control my-3"
             id="SignInComp_firstName"
             aria-describedby="emailHelp"
             required
             v-model="user.firstName"
           ></b-form-input>
-          <p>Apellido:</p>
           <b-form-input
-            :placeholder="'Ingrese su apellido'"
+            :placeholder="'Apellido'"
             type="text"
-            class="form-control"
+            class="form-control my-3"
             id="SignInComp_lastName"
             aria-describedby="emailHelp"
             required
@@ -38,14 +44,12 @@
           ></b-form-input>
         </b-form-group>
         <b-form-group
-          label="Email"
           label-for="Usuario-input"
-          invalid-feedback="Se requiere un usuario válido"
         >
           <b-form-input
-            :placeholder="'Ingrese su correo electrónico'"
+            :placeholder="'Correo electrónico'"
             type="email"
-            class="form-control"
+            class="form-control my-3"
             id="LogInComponent_Username"
             aria-describedby="emailHelp"
             required
@@ -53,14 +57,12 @@
           ></b-form-input>
         </b-form-group>
         <b-form-group
-          :placeholder="'Ingrese su contraseña'"
-          label="Contraseña"
           label-for="Password-input"
-          invalid-feedback="Se requiere una contraseña"
         >
           <b-form-input
+            :placeholder="'Contraseña'"
             type="password"
-            class="form-control"
+            class="form-control my-3"
             id="LogInComponent_Password"
             v-model="user.password"
             required
@@ -68,8 +70,8 @@
         </b-form-group>
       </form>
       <div style="text-align: end; margin-top: 1rem">
-        <b-button @click.stop.prevent="SignUpUser" variant="outline-primary"
-          >Ingresar</b-button
+        <b-button @click.stop.prevent="SignUpUser" variant="outline-primary" class="sign_btn"
+          >Guardar datos</b-button
         >
       </div>
     </b-modal>
@@ -97,17 +99,40 @@ export default {
       try {
         const { email, password, firstName, lastName } = this.user;
         const auth = getAuth();
-        await createUserWithEmailAndPassword(auth, email, password);
-        await addDoc(collection(this.myFirestore, "saturnousers"), {
-          userFirstName: firstName,
-          userLastName: lastName,
-          user_email: email,
-        }),
+        if (/^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+          await createUserWithEmailAndPassword(auth, email, password);
+          await addDoc(collection(this.myFirestore, "saturnousers"), {
+            userFirstName: firstName,
+            userLastName: lastName,
+            user_email: email,
+          }),
           this.$router.push("/users");
-      } catch (error) {
-        alert("Este usuario ya existe");
-      }
+          } else {
+              alert("Ingrese correo válido");
+            }
+      } catch {
+          alert("Este usuario ya existe");
+        }  
     },
   },
 };
 </script>
+
+<style scoped>
+.sign_btn {
+  background-color: purple;
+  border: 0px solid;
+  color: white;
+}
+.sign_btn:hover {
+  background-color: white;
+  border: 1px solid purple;
+  color: purple;
+}
+.sign_btn:focus {
+  background-color: purple;
+  border: 0px solid;
+  border-radius: 0px;
+  color: #fff;
+}
+</style>

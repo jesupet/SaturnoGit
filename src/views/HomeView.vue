@@ -1,5 +1,6 @@
 <template>
   <div>
+    <WeatherModal :weatherData="getBaikonurData"/>
     <header class="header_container">
       <b-jumbotron
       class="hero_img" 
@@ -28,13 +29,22 @@
 
 import HomeTour from '../components/HomeTour.vue'
 import TypeForm from '../components/TypeForm.vue'
-import { mapGetters } from "vuex";
+import WeatherModal from '../components/WeatherModal.vue'
+import { mapGetters} from "vuex";
 
 export default {
   name: "HomeView",
-  components: { TypeForm, HomeTour},
+  components: { TypeForm, HomeTour, WeatherModal},
   computed: {
-    ...mapGetters(["getHighlightedTours"])
+    ...mapGetters(["getHighlightedTours", "getBaikonurData"])
+  },
+  methods: {
+    showModal() {
+        this.$refs['my-modal'].show()
+      },
+  },
+  mounted(){
+    this.showModal();
   },
 };
 </script>

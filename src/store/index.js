@@ -368,17 +368,16 @@ export default new Vuex.Store({
       commit('removeFromFavourites', param1)
     },
     activateNewsletterSub({ commit }, subscriberEmail) {
-      console.log('Param1 = ' + subscriberEmail)
       let message = ""
       let variant = ""
-      if (subscriberEmail != undefined) {
-        message ="Su correo fue registrado correctamente, muchas gracias :)"
-        variant = "success"
-        commit('subscribeToNewsletter', subscriberEmail)
-      } else {
-        message ="Correo electrónico no válido, intenta de nuevo"
-        variant = "danger"
-      }
+        if (/^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/.test(subscriberEmail)){
+          message ="Su correo fue registrado correctamente, muchas gracias :)"
+          variant = "success"
+          commit('subscribeToNewsletter', subscriberEmail)
+        } else{
+            message ="Correo electrónico no válido, intenta de nuevo"
+            variant = "danger"
+          } 
       commit('dataToAlert', {message, variant})
     },
     activateRequestTourInfo({ commit }, param1) {
