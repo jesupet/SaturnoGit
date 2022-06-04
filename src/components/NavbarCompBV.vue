@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" class="nav_comp">
+    <b-navbar toggleable="lg" type="dark" class="nav_comp fixed-top">
       <a class="navbar-brand">
         <img
           src="../assets/saturn_logo.svg"
@@ -94,8 +94,9 @@ export default {
 }
 .nav_comp {
   height: 100px;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 20%);
   flex-wrap: wrap;
+  
 }
 .saturn-icon {
   height: 70px;
