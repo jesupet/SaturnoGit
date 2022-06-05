@@ -31,7 +31,7 @@
           </button>
           <b-alert
           
-          class="position-fixed fixed-top m-0 rounded-0"
+          class="position-fixed fixed-bottom m-0 rounded-0"
           style="z-index: 2000;"
           variant="info"
           :show="dismissCountDown"
@@ -71,7 +71,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import DetailsModal from "../components/DetailsModal.vue";
+import DetailsModal from "../components/modals/DetailsModal.vue";
 import LogInModal from "./auth/LogInModal.vue";
 import SignUpModal from "./auth/SignUpModal.vue";
 
@@ -139,9 +139,9 @@ export default {
 .availability {
   position: absolute;
   z-index: 10;
-  color: white;
+  color: #000;
   text-align: center;
-  background-color: rgb(165, 0, 0);
+  background-color: #ffc107;
   border: #fff dashed 1px;
   width:120%;
   top: 130px;

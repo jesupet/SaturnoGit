@@ -1,78 +1,70 @@
 <template>
   <div>
     <div class="main-section px-5 table-responsive">
-      <div v-for="(users, index) in getUsersTours" :key="index">
-        <div v-if="activeUser.email == users.user_email">
-          <h1 style="color: white">
-            Bienvenido: {{ users.userFirstName }} {{ users.userLastName }}
-          </h1>
-        </div>
-      </div>
-      <h2 class="title">Tus tours favoritos</h2>
+      <h1 class="title">Tus tours favoritos</h1>
       <table class="table">
         <thead style="color: white">
           <tr>
             <th scope="col">#</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Disponibilidad</th>
-            <th scope="col">Vacantes</th>
-            <th scope="col">Duración</th>
+            <th scope="col" class="hide_sm">Disponibilidad</th>
+            <th scope="col" class="hide_sm">Vacantes</th>
+            <th scope="col" class="hide_sm">Duración</th>
+            <th colspan="3" scope="colgroup">Acciones</th>
           </tr>
         </thead>
         <tbody
-          v-for="(tours, index) in getListTours"
+          v-for="(tour, index) in getFavouritesByUser"
           :key="index"
           style="color: white"
         >
-          <b-sidebar :id="'sidebar'+tours.id" :title="tours.name" shadow right width="35%" bg-variant="dark" text-variant="light">
+          <b-sidebar :id="'sidebar'+tour.id" :title="tour.name" shadow right width="35%" bg-variant="dark" text-variant="light">
             <div class="px-3 py-2">
               <p>
-                {{tours.description}}
+                {{tour.description}}
               </p>
               <b-img
-                :src="tours.image_url"
+                :src="tour.image_url"
                 fluid
                 thumbnail
               ></b-img>
             </div>
           </b-sidebar>
-          <tr v-for="(userEmail, i) in tours.favourited_by" :key="i">
-            <th v-if="userEmail == activeUser.email" scope="row">
+          <tr>
+            <th scope="row">
               {{ parseInt(index) + 1 }}
             </th>
-            <td v-if="userEmail == activeUser.email" v-b-toggle="'sidebar'+tours.id">
-              {{ tours.name }}
+            <td v-b-toggle="'sidebar'+tour.id">
+              {{ tour.name }}
             </td>
 
-            <td v-if="userEmail == activeUser.email">
-              {{ tours.available ? "Si" : "No" }}
+            <td class="hide_sm">
+              {{ tour.available ? "Si" : "No" }}
             </td>
-            <td v-if="userEmail == activeUser.email">{{ tours.vacancies }}</td>
-            <td v-if="userEmail == activeUser.email">
-              {{ tours.duration_hrs }} horas
+            <td class="hide_sm">{{ tour.vacancies }}</td>
+            <td class="hide_sm">
+              {{ tour.duration_hrs }} horas
             </td>
-            <td v-if="userEmail == activeUser.email">
-              <DeleteButton
-                :btnName="'Remover'"
-                :purpose="activateRemoveFromFavourites"
-                :params="[activeUser.email, tours.id]"
+            
+            <td class="td_btn">
+              <SidebarComp :tourData="tour" class="col-3" />
+            </td>
+            <td class="td_btn">
+              <RequestModalComp
+                :userEmail="activeUser.email"
+                :tourID="tour.id"
+                :tourName="tour.name"
               />
             </td>
-            <td v-if="userEmail == activeUser.email">
-              <button
-                type="button"
-                class="btn btn-primary"
-                data-bs-toggle="modal"
-                :data-bs-target="'#modalDetails' + tours.id"
+            <td class="td_btn">
+              <b-button
+                @click.prevent="
+                  activateRemoveFromFavourites([activeUser.email, tour.id])
+                "
+                class="btn_delete"
               >
-                Ver detalles
-              </button>
-              <DetailsModal
-                :idKey="tours.id"
-                :name="tours.name"
-                :index="index"
-                :description="tours.description"
-              />
+                <font-awesome-icon icon="fa-solid fa-trash" />
+              </b-button>
             </td>
           </tr>
         </tbody>
@@ -83,32 +75,35 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import DeleteButton from "./buttons/DeleteButton.vue";
-import DetailsModal from "./DetailsModal.vue";
+import SidebarComp from "./SidebarComp.vue";
+import RequestModalComp from "./modals/RequestModalComp.vue";
+
 
 export default {
-  name: "UserView",
-  components: { DeleteButton, DetailsModal },
+  name: "FavouriteTable",
+  components: {SidebarComp, RequestModalComp },
   methods: {
-    ...mapActions(["activateRemoveFromFavourites"]),
+    ...mapActions(["activateRemoveFromFavourites", "activateRequestTourInfo"]),
   },
   computed: {
-    ...mapGetters(["activeUser", "getListTours", "getUsersTours"]),
-    ...mapActions(["getUsers"]),
+    ...mapGetters(["activeUser", "getListTours", "getFavouritesByUser", "getUsername"]),
     /*userInfo: function () {
       retunr this.tours.favourite_by.filter(i => i.email == 'userEmal')
     }*/
   },
   beforeMount() {
-    this.getUsers;
-    this.getUsersTours;
+    this.getListTours;
   },
 };
 </script>
 
-<style>
-.container {
-  width: 95%;
+<style scoped>
+.main-section {
+  margin-bottom: 0px;
+  padding-top: 100px;
+  padding-bottom: 150px;
+  background: url(../assets/img/bg_img.jpeg);
+  margin: 0%;
 }
 
 .displayTour {
@@ -119,4 +114,37 @@ export default {
 .noDisplay {
   display: none;
 }
+
+.hideButton {
+  display: none;
+}
+
+.showButton {
+  display: block;
+}
+.btn_delete {
+  background-color: purple;
+  border: 0px solid;
+  color: white;
+}
+.btn_delete:hover {
+  background-color: white;
+  border: 1px solid purple;
+  color: purple;
+}
+.btn_delete:focus {
+  background-color: purple;
+  border: 0px solid;
+  border-radius: 0px;
+  color: #fff;
+}
+.td_btn {
+  padding-right: 0;
+  padding-left: 0;
+}
+ @media screen and (max-width: 1000px) {
+   .hide_sm {
+     display: none;
+   }
+ }
 </style>

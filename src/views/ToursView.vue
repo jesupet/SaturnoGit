@@ -23,7 +23,7 @@ export default {
 
 <style scoped>
 .card-container {
-  background-image: url("https://cdn.mos.cms.futurecdn.net/owm4oa3hXUG58mka7hPvfP.jpg");
+  background: url(../assets/img/bg_img.jpeg);
   margin: 0%;
   padding: 10px;
 }

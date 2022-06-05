@@ -24,7 +24,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import SidebarComp from "./SidebarComp.vue";
-import RequestModalComp from "./RequestModalComp.vue";
+import RequestModalComp from "./modals/RequestModalComp.vue";
 
 export default {
   name: "UserView",

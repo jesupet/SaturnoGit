@@ -29,7 +29,7 @@
 
 import HomeTour from '../components/HomeTour.vue'
 import TypeForm from '../components/TypeForm.vue'
-import WeatherModal from '../components/WeatherModal.vue'
+import WeatherModal from '../components/modals/WeatherModal.vue'
 import { mapGetters} from "vuex";
 
 export default {

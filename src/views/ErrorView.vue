@@ -17,7 +17,7 @@
 
 <style scoped>
 .error_section {
-  background-image: url("https://cdn.mos.cms.futurecdn.net/owm4oa3hXUG58mka7hPvfP.jpg");
+  background: url(../assets/img/bg_img.jpeg);;
   margin-top: 0%;
   padding: 10px;
   color: #fff;
