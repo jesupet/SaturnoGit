@@ -2,14 +2,18 @@
   <div>
     <WeatherModal :weatherData="getBaikonurData"/>
     <header class="header_container">
+      <video id="background-video" autoplay loop muted>
+        <source src="../assets/galaxy.mp4" type="video/mp4">
+      </video>
       <b-jumbotron
-      class="hero_img" 
+      class="hero_img content" 
       header="¡Bienvenido a Sa-tour-now!" 
       lead="Encuentra toda la información sobre qué hacer en Saturno">
       <div class="text-center align-text-bottom arrow_icon">
         <a class="arrow_link" href="#tours_destacados"><font-awesome-icon icon="fa-solid fa-angles-down" size="4x"/></a>
       </div>
       </b-jumbotron>
+      
     </header>
     <section class="main-section">
       <b-container id="tours_destacados">
@@ -55,7 +59,6 @@ export default {
    z-index:0;
   }
   .hero_img{
-    background-image: url("https://cdn.mos.cms.futurecdn.net/owm4oa3hXUG58mka7hPvfP.jpg");
     height: 115vh;
     background-size: cover;
     background-repeat: no-repeat;
@@ -83,6 +86,10 @@ export default {
   #tours_destacados {
     padding-bottom: 50px;
   }
+  .main-section {
+    
+    position: relative;
+  }
   .btn_tours {
     background-color: #2f0094;
     border: 0px transparent;
@@ -94,6 +101,16 @@ export default {
     background-color: white;
     color: #2f0094;
   }
-
+  #background-video {
+  width: 100%;
+  height: 115vh;
+  object-fit: cover;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+}
   
 </style>

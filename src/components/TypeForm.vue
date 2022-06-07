@@ -67,6 +67,7 @@ export default {
   background-position: center;
   padding-top: 60px;
   padding-bottom: 60px;
+  position: relative;
 }
 
 .email_input {
