@@ -87,7 +87,6 @@ export default {
     padding-bottom: 50px;
   }
   .main-section {
-    
     position: relative;
   }
   .btn_tours {
