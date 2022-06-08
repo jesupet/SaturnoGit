@@ -17,7 +17,16 @@
             alt="Imagen"
             v-bind:src="tour.image_url"
           />
-          <SignUpAndLogIn/>
+          <button
+            @click.stop.prevent="
+              checkLoggedUser([activeUser, activeUser.email, tour.id])
+            "
+            @click="showAlert"
+            class="fav_btn"
+            type="button"
+          >
+            <font-awesome-icon icon="fa-solid fa-heart" size="2x" />
+          </button>
           
           <b-alert
           
@@ -62,7 +71,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import DetailsModal from "../components/modals/DetailsModal.vue";
-import SignUpAndLogIn from "./auth/SignUpAndLogIn.vue";
+
 
 export default {
   name: "ToursCard",
@@ -78,7 +87,6 @@ export default {
   },
   components: {
     DetailsModal,
-    SignUpAndLogIn,
   },
   methods: {
     countDownChanged(dismissCountDown) {

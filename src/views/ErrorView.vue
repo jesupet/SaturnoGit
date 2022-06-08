@@ -21,6 +21,7 @@
   margin-top: 0%;
   padding: 10px;
   color: #fff;
+  min-height: calc(100vh - 10vh);
 }
 .title {
   font-weight: 700;

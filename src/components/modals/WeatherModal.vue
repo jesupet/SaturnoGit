@@ -23,7 +23,7 @@
 export default {
   name: "WeatherModal",
   props: {
-    weatherData: Array
+    weatherData: Object
   },
   methods: {
     showModal() {

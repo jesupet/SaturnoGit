@@ -1,10 +1,20 @@
 <template>
   <div>
-    <b-button v-b-modal="'modalDetails' + idKey" class="seemore_btn"
+    <b-button v-b-modal="'modalDetails' + idKey" class="seemore_btn purple_btn"
       >Ver más</b-button
     >
 
-    <b-modal :id="'modalDetails' + idKey" :title="tour.name" v-model="show">
+    <b-modal 
+      :id="'modalDetails' + idKey" 
+      :title="tour.name" 
+      v-model="show"
+      body-bg-variant="dark"
+      body-text-variant="light"
+      header-bg-variant="dark"
+      header-text-variant="light"
+      hide-header-close
+      hide-footer
+      >
       <b-img :src="tour.image_url" fluid alt="Responsive image"></b-img>
       <p class="my-4">{{ tour.description }}</p>
       <template #modal-footer>
