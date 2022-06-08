@@ -108,10 +108,10 @@ export default {
           }),
           this.$router.push("/users");
           } else {
-              alert("Ingrese correo válido");
+              console.log("Ingrese correo válido");
             }
       } catch {
-          alert("Este usuario ya existe");
+          console.log("Este usuario ya existe");
         }  
     },
   },

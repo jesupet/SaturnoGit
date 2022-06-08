@@ -321,7 +321,7 @@ export default new Vuex.Store({
         context.commit("mutateUsername", "")
         context.commit("mutatePassword", "")
       } catch (error) {
-        alert("Usuario y/o contraseña no reconocidos");
+        console.log("Usuario y/o contraseña no reconocidos");
       }
     },
     logOutUser() {
