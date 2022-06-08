@@ -1,15 +1,19 @@
 <template>
   <div class="col-12 row pb-4 m-0">
     <!--MODAL PARA SUGERIR LOGIN Y SIGNUP SI EL USUARIO NO ESTÁ LOGUEADO-->
-     
- 
+    <b-modal v-model="modalShow" hide-footer>
+    <div>
+      <h3>¿Tienes usuario?</h3>
+      <LogInModal/>
+      <h3>Si no tienes usuario, puedes registrarte aquí</h3>
+      <SignUpModal/>
+    </div>
+    </b-modal>
     <!--FIN MODAL-->
     <div class="col-md-4 p-2" v-for="(tour, index) in listTours" :key="index">
       <div class="card mx-4 my-2 card_container">
         <div class="availability" v-if="tour.available == false">
-          <p class="my-3">
-            No disponible
-          </p> 
+          <p class="my-3">No disponible</p>
         </div>
         <div class="img_container_1">
           <img
@@ -17,35 +21,47 @@
             alt="Imagen"
             v-bind:src="tour.image_url"
           />
-          <SignUpAndLogIn/>
-          
+          <button
+            @click.stop.prevent="
+              checkLoggedUser([activeUser, activeUser.email, tour.id])
+            "
+            @click="showAlert = !showAlert"
+            class="fav_btn"
+            type="button"
+          >
+            <font-awesome-icon icon="fa-solid fa-heart" size="2x" />
+          </button>
+
           <b-alert
-          
-          class="position-fixed fixed-bottom m-0 rounded-0"
-          style="z-index: 2000;"
-          variant="info"
-          :show="dismissCountDown"
-          
-          fade
-          @dismiss-count-down="countDownChanged"
-        >
-          El tour ha sido agregado a tu favoritos. Para ver la lista completa haz <router-link to="/users" class="alert-link">click aquí</router-link>
-        </b-alert>
+            class="position-fixed fixed-bottom m-0 rounded-0"
+            style="z-index: 2000"
+            variant="info"
+            :show="dismissCountDown"
+            fade
+            @dismiss-count-down="countDownChanged"
+          >
+            El tour ha sido agregado a tu favoritos. Para ver la lista completa
+            haz
+            <router-link to="/users" class="alert-link">click aquí</router-link>
+          </b-alert>
         </div>
         <div class="card-body">
           <h5 class="card-title">
             {{ tour.name }}
           </h5>
-          <hr style="color: white">
+          <hr style="color: white" />
           <ul class="list-group">
             <li class="list-group-item">
-              <span style="color: rgb(238, 0, 238)">Valor:</span> {{ "$" + tour.price_usd }} USD. (Por persona)
+              <span style="color: rgb(238, 0, 238)">Valor:</span>
+              {{ "$" + tour.price_usd }} USD. (Por persona)
             </li>
             <li class="list-group-item">
-             <span style="color: rgb(238, 0, 238)">Duración:</span> {{ tour.duration_hrs }} horas
+              <span style="color: rgb(238, 0, 238)">Duración:</span>
+              {{ tour.duration_hrs }} horas
             </li>
             <li class="list-group-item">
-              <span style="color: rgb(238, 0, 238)">Vacantes disponibles:</span> {{ tour.vacancies - tour.enrrolled }} / {{ tour.vacancies }}
+              <span style="color: rgb(238, 0, 238)">Vacantes disponibles:</span>
+              {{ tour.vacancies - tour.enrrolled }} / {{ tour.vacancies }}
             </li>
           </ul>
         </div>
@@ -62,7 +78,8 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import DetailsModal from "../components/modals/DetailsModal.vue";
-import SignUpAndLogIn from "./auth/SignUpAndLogIn.vue";
+import LogInModal from "./auth/LogInModal.vue";
+import SignUpModal from "./auth/SignUpModal.vue";
 
 export default {
   name: "ToursCard",
@@ -71,47 +88,41 @@ export default {
       dismissSecs: 5,
       dismissCountDown: 0,
       modalShow: false,
-    }
+    };
   },
   props: {
     listTours: Array,
   },
   components: {
     DetailsModal,
-    SignUpAndLogIn,
-  },
+    LogInModal,
+    SignUpModal
+},
   methods: {
     countDownChanged(dismissCountDown) {
-        this.dismissCountDown = dismissCountDown
-      },
-      showAlert() {
-        this.dismissCountDown = this.dismissSecs
-      },
+      this.dismissCountDown = dismissCountDown;
+    },
+    showAlert() {
+      this.dismissCountDown = this.dismissSecs;
+    },
     ...mapActions([
       "getUsers",
       "activateAddToFavourites",
       "activateAddToFavourites_2",
       "activateRemoveFromFavourites",
-      //activateAddToFavourites([activeUser.email, tour.id])
     ]),
     checkLoggedUser(data1) {
-      console.log(data1);
       let [userStatus, userEmail, TourID] = data1;
-      console.log({ userStatus });
-      console.log({ userEmail });
-      console.log({ TourID });
       if (userStatus == false) {
         this.modalShow = !this.modalShow;
       } else {
         this.activateAddToFavourites([userEmail, TourID]);
       }
     },
-    
   },
   computed: {
     ...mapGetters(["activeUser"]),
     activeUserNow() {
-      console.log(this.activeUser);
       return this.activeUser;
     },
   },
@@ -132,10 +143,10 @@ export default {
   text-align: center;
   background-color: #ffc107;
   border: #fff dashed 1px;
-  width:120%;
+  width: 120%;
   top: 130px;
   left: -50px;
-  transform: rotate(-30deg)
+  transform: rotate(-30deg);
 }
 .img_container_1 {
   height: 60%;
@@ -179,14 +190,15 @@ path:active {
   color: #fff;
 }
 .toast:not(.show) {
-   display: block;
+  display: block;
 }
 .card_container {
   height: 80vh;
   position: relative;
-  z-index:0;
+  z-index: 0;
 }
-.list-group-item, .card_container {
+.list-group-item,
+.card_container {
   background-color: #000;
   color: #fff;
 }
@@ -195,5 +207,4 @@ path:active {
   text-align: center;
   padding: 10px 0px;
 }
-
 </style>

@@ -102,14 +102,12 @@ export default new Vuex.Store({
       const activeUserFavourites = listUsers.find(element => element.user_email == activeUserEmail)
       let result = []
       activeUserFavourites.favourites.map((fav) => {
-        console.log({ fav })
         state.listTours.map((tour) => {
           if (tour.id == fav) {
             result.push(tour)
           }
         })
       })
-      console.log({ result })
       return result
     },
     getUsername(state) {
@@ -189,7 +187,6 @@ export default new Vuex.Store({
       return result
     },
     getAlertData(state) {
-      console.log(state.alert)
       return state.alert
     },
   },
@@ -220,7 +217,6 @@ export default new Vuex.Store({
       let param3 = userProfile.id.toString()
       const newFavourite = doc(this.state.myFirestore, "saturnousers", param3);
       updateDoc(newFavourite, { favourites: arrayUnion(param2) });
-      //alert('Tour añadido a favoritos')
     },
     removeFromFavourites(state, payload) {
       let [param1, param2] = payload;
@@ -228,20 +224,13 @@ export default new Vuex.Store({
       let param3 = userProfile.id.toString()
       const removeFavourite = doc(this.state.myFirestore, "saturnousers", param3);
       updateDoc(removeFavourite, { favourites: arrayRemove(param2) });
-      alert('Tour eliminado de favoritos')
     },
     requestTourInfo(state, payload) {
       let [param1, param2, param3, param4] = payload;
       let userProfile = this.getters.getListUsers.find(element => element.user_email == param1)
       let param5 = userProfile.id.toString()
-      //console.log('param1 es el email: ' + param1);
-      //console.log('param2 es el ID del tour ' + param2);
-      //console.log('param3 es el nombre del tour ' + param3);
-      //console.log('param4 es la descripción de la info ' + param4);
-      //console.log('param5 es el usuario filtrado ' + param5);
       const newTourInfoRequest = doc(this.state.myFirestore, "saturnousers", param5);
       updateDoc(newTourInfoRequest, { infoRequests: arrayUnion({ param1, param2, param3, param4 }) });
-      alert('Solicitud enviada con éxito')
     },
     onReset(event) {
       event.preventDefault()
@@ -339,7 +328,7 @@ export default new Vuex.Store({
       const auth = getAuth();
       signOut(auth)
         .then(() => {
-          alert("Sesión cerrada exitosamente");
+          console.log("Sesión cerrada exitosamente");
         })
         .catch(() => {
           // An error happened.
@@ -378,19 +367,16 @@ export default new Vuex.Store({
     async callOnemiData({ commit }) {
       const URL = `https://api.nasa.gov/neo/rest/v1/feed?start_date=2022-05-31E&end_date=2022-06-05&api_key=OaGIu1rtXVFHo5u3Nh04arwUua6VCffTerY8mSBX`
       const data = await fetch(URL).then(response => response.json())
-      console.log(data)
       commit('mutateOnemiData', data)
     },
     async callBaikonurData({ commit }) {
       const URL = `https://goweather.herokuapp.com/weather/Baikonur`
       const data = await fetch(URL).then(response => response.json())
-      console.log(data)
       commit('mutateBaikonurData', data)
     },
     async callSpaceLaunchData({ commit }) {
       const URL = `https://api.sbif.cl/api-sbifv3/recursos_api/dolar?apikey=4ac9912c9934d28e378d474d52e70a890360a41b&formato=json`
       const data = await fetch(URL).then(response => response.json())
-      console.log(data)
       commit('mutateSpaceLaunchData', data)
     },
   }

@@ -1,30 +1,20 @@
 <template>
   <div>
-    <button
-      @click.stop.prevent="
-        checkLoggedUser([activeUser, activeUser.email, tour.id])
-      "
-      @click="showAlert"
-      class="fav_btn"
-      type="button"
-    >
-      <font-awesome-icon icon="fa-solid fa-heart" size="2x" />
-    </button>
-    <b-modal 
-      id="SignUpAndLogIn" 
-      ref="modal" 
-      title="Regístrate a Sa-Tour-Now!" 
+    <b-button @click="modalShow = !modalShow">Open Modal</b-button>
+    <b-modal
+      id="SignUpAndLogIn"
+      ref="modal"
+      title="Regístrate a Sa-Tour-Now!"
       hide-footer
       body-bg-variant="dark"
       body-text-variant="light"
       header-bg-variant="dark"
       header-text-variant="light"
       hide-header-close
+      v-model="modalShow"
     >
       <form ref="form">
-        <b-form-group
-          label-for="Usuario-DatosPersonales"
-        >
+        <b-form-group label-for="Usuario-DatosPersonales">
           <b-form-input
             :placeholder="'Nombre'"
             type="text"
@@ -44,9 +34,7 @@
             v-model="user.lastName"
           ></b-form-input>
         </b-form-group>
-        <b-form-group
-          label-for="Usuario-input"
-        >
+        <b-form-group label-for="Usuario-input">
           <b-form-input
             :placeholder="'Correo electrónico'"
             type="email"
@@ -57,9 +45,7 @@
             v-model="user.email"
           ></b-form-input>
         </b-form-group>
-        <b-form-group
-          label-for="Password-input"
-        >
+        <b-form-group label-for="Password-input">
           <b-form-input
             :placeholder="'Contraseña'"
             type="password"
@@ -71,7 +57,10 @@
         </b-form-group>
       </form>
       <div style="text-align: end; margin-top: 1rem">
-        <b-button @click.stop.prevent="SignUpUser" variant="outline-primary" class="sign_btn"
+        <b-button
+          @click.stop.prevent="SignUpUser"
+          variant="outline-primary"
+          class="sign_btn"
           >Guardar datos</b-button
         >
       </div>
@@ -80,7 +69,6 @@
 </template>
 
 <script>
-
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
 import { mapState } from "vuex";
@@ -96,25 +84,38 @@ export default {
   computed: {
     ...mapState(["myFirestore"]),
   },
+
   methods: {
+    checkLoggedUser(data1) {
+      console.log(data1);
+      let [userStatus, userEmail, TourID] = data1;
+      console.log({ userStatus });
+      console.log({ userEmail });
+      console.log({ TourID });
+      if (userStatus == false) {
+        this.modalShow = !this.modalShow;
+      } else {
+        this.activateAddToFavourites([userEmail, TourID]);
+      }
+    },
     async SignUpUser() {
       try {
         const { email, password, firstName, lastName } = this.user;
         const auth = getAuth();
-        if (/^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+        if (/^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
           await createUserWithEmailAndPassword(auth, email, password);
           await addDoc(collection(this.myFirestore, "saturnousers"), {
             userFirstName: firstName,
             userLastName: lastName,
             user_email: email,
           }),
-          this.$router.push("/users");
-          } else {
-              alert("Ingrese correo válido");
-            }
+            this.$router.push("/users");
+        } else {
+          alert("Ingrese correo válido");
+        }
       } catch {
-          alert("Este usuario ya existe");
-        }  
+        alert("Este usuario ya existe");
+      }
     },
   },
 };

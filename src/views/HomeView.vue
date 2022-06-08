@@ -43,16 +43,10 @@ export default {
     ...mapGetters(["getHighlightedTours", "getBaikonurData"])
   },
   methods: {
-    showModal() {
-        this.$refs['my-modal'].show()
-      },
     goToToursView() {
       window.scrollTo(0, 0);
       this.$router.push("/tours") 
     }
-  },
-  mounted(){
-    this.showModal();
   },
 };
 </script>

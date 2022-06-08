@@ -18,18 +18,6 @@
           :key="index"
           style="color: white"
         >
-          <b-sidebar :id="'sidebar'+tour.id" :title="tour.name" shadow right width="35%" bg-variant="dark" text-variant="light">
-            <div class="px-3 py-2">
-              <p>
-                {{tour.description}}
-              </p>
-              <b-img
-                :src="tour.image_url"
-                fluid
-                thumbnail
-              ></b-img>
-            </div>
-          </b-sidebar>
           <tr>
             <th scope="row">
               {{ parseInt(index) + 1 }}

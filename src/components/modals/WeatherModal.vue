@@ -3,7 +3,7 @@
     <b-modal 
       id="modal-center" 
       centered 
-      title="Datos meterológicos de Saturno hoy" 
+      title="Meteorología // Cosmódromo de Baikonur" 
       ref="my-modal" 
       body-bg-variant="dark"
       body-text-variant="light"
@@ -12,8 +12,9 @@
       hide-header-close
       hide-footer
       >
-      <p class="my-4"><font-awesome-icon size="2x" icon="fa-solid fa-temperature-half" class="mx-3"/>La temperatura actual en Saturno es: {{weatherData.temperature}}</p>
-      <p class="my-4"><font-awesome-icon size="2x" icon="fa-solid fa-wind" class="mx-3" />Los vientos llegan hasta los: {{weatherData.wind}}</p>    
+      <p class="my-4"><font-awesome-icon size="2x" icon="fa-solid fa-temperature-half" class="mx-3"/>La temperatura actual es: {{weatherData.temperature}}</p>
+      <p class="my-4"><font-awesome-icon size="2x" icon="fa-solid fa-wind" class="mx-3" />Los vientos llegan hasta los: {{weatherData.wind}}</p> 
+      <p class="my-4"><font-awesome-icon size="2x" icon="fa-solid fa-plane-departure" class="mx-3" />Condiciones para viajar a Saturno: Óptimas</p>   
     </b-modal>
   </div>
 </template>
@@ -22,9 +23,7 @@
 
 export default {
   name: "WeatherModal",
-  props: {
-    weatherData: Array
-  },
+  props: ['weatherData'],
   methods: {
     showModal() {
         this.$refs['my-modal'].show()
