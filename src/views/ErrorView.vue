@@ -25,7 +25,7 @@
 }
 .title {
   font-weight: 700;
-  padding-top: 100px;
+  padding-top: 120px;
 }
 .face_img {
   width: 300px;

@@ -11,7 +11,7 @@
       </a>
       <b-navbar-brand class="mx-4" to="/">SA-TOUR-NOW!</b-navbar-brand>
 
-      <b-navbar-toggle target="nav-collapse" class="toggle_menu"></b-navbar-toggle>
+      <b-navbar-toggle target="nav-collapse" class="toggle_menu m-3"></b-navbar-toggle>
 
       <b-collapse class="navbar-nav m-0" id="nav-collapse" is-nav>
         <b-navbar-nav>
@@ -27,6 +27,7 @@
             size="sm"
             class="my-2 my-sm-0"
             type="submit"
+            disabled
             >{{ activeUser.email }}</b-button
           >
           <b-button
@@ -117,5 +118,8 @@ export default {
   background-color: black;
   padding-bottom: 20px;
   color: white;
+}
+.btn.disabled {
+  opacity: 100%;
 }
 </style>

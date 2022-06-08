@@ -29,6 +29,6 @@ export default {
   min-height: calc(100vh - 10vh);
 }
 .title {
-  padding-top: 100px;
+  padding-top: 120px;
 }
 </style>

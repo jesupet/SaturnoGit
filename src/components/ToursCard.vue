@@ -1,19 +1,31 @@
 <template>
   <div class="col-12 row pb-4 m-0">
     <!--MODAL PARA SUGERIR LOGIN Y SIGNUP SI EL USUARIO NO ESTÁ LOGUEADO-->
-    <b-modal v-model="modalShow" hide-footer>
+    <b-modal 
+      v-model="modalShow" 
+      body-bg-variant="dark"
+      body-text-variant="light"
+      header-bg-variant="dark"
+      header-text-variant="light"
+      title="Necesitas identificarte para continuar" 
+      hide-header-close
+      hide-footer>
     <div>
-      <h3>¿Tienes usuario?</h3>
-      <LogInModal/>
-      <h3>Si no tienes usuario, puedes registrarte aquí</h3>
-      <SignUpModal/>
+      <div class="cont_mod">
+        <h3 class="title">Si ya tienes cuenta:</h3>
+        <LogInModal/>
+      </div>
+      <div class="cont_mod">
+        <h3 class="title">Si aún no te registras puedes hacerlo aquí:</h3>
+        <SignUpModal/>
+      </div>
     </div>
     </b-modal>
     <!--FIN MODAL-->
     <div class="col-md-4 p-2" v-for="(tour, index) in listTours" :key="index">
       <div class="card mx-4 my-2 card_container">
         <div class="availability" v-if="tour.available == false">
-          <p class="my-3">No disponible</p>
+          <p>No disponible</p>
         </div>
         <div class="img_container_1">
           <img
@@ -141,12 +153,15 @@ export default {
   z-index: 10;
   color: #000;
   text-align: center;
+  align-content: center;
   background-color: #ffc107;
   border: #fff dashed 1px;
-  width: 120%;
-  top: 130px;
-  left: -50px;
-  transform: rotate(-30deg);
+  width: 50%;
+  height: 40px;
+  padding: 10px;
+  p {
+    margin: 0px;
+  }
 }
 .img_container_1 {
   height: 60%;
@@ -206,5 +221,13 @@ path:active {
   font-size: 25px;
   text-align: center;
   padding: 10px 0px;
+}
+.title {
+  font-size: 20px;
+  font-weight: 300;
+  text-align: left;
+}
+.cont_mod {
+  text-align: center;
 }
 </style>

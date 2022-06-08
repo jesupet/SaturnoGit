@@ -11,6 +11,8 @@
       width="30%" 
       bg-variant="dark" 
       text-variant="light"
+      no-header-close
+      backdrop="true"
       >
       <div class="px-3 py-2">
         <p>

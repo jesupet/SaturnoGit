@@ -1,9 +1,9 @@
 <template>
   <div>
     <b-button
-      variant="light"
+      variant="warning"
       size="sm"
-      class="my-2 my-sm-0 px-3 py-2"
+      class="nav_btn btn_yellow"
       type="submit"
       v-b-modal="'LogInModal'"
       >Ingresa</b-button
@@ -90,6 +90,17 @@ export default {
 </script>
 
 <style scoped>
+.nav_btn {
+  padding: 0.7em 1.2em;
+  margin: 1em;
+}
+.btn_yellow:hover{
+  background-color: white;
+}
+.btn_yellow:focus{
+  outline: none;
+  box-shadow: none;
+}
 .sign_btn {
   background-color: purple;
   border: 0px solid;
@@ -103,7 +114,6 @@ export default {
 .sign_btn:focus {
   background-color: purple;
   border: 0px solid;
-  border-radius: 0px;
   color: #fff;
 }
 

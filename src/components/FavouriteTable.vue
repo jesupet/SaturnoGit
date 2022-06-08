@@ -91,7 +91,7 @@ export default {
 <style scoped lang="scss">
 .main-section {
   margin-bottom: 0px;
-  padding-top: 100px;
+  padding-top: 120px;
   padding-bottom: 150px;
   background: url(../assets/img/bg_img.jpeg);
   margin: 0%;
