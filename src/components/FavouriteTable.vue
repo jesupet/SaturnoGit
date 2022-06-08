@@ -43,7 +43,7 @@
             </td>
             <td class="hide_sm">{{ tour.vacancies }}</td>
             <td class="hide_sm">
-              {{ tour.duration_hrs }} horas
+              {{ formatNumber(tour.duration_hrs)}} horas
             </td>
             
             <td class="td_btn">
@@ -84,6 +84,9 @@ export default {
   components: {SidebarComp, RequestModalComp },
   methods: {
     ...mapActions(["activateRemoveFromFavourites", "activateRequestTourInfo"]),
+    formatNumber(number){
+      return parseInt(number).toLocaleString("es-CL")
+    }
   },
   computed: {
     ...mapGetters(["activeUser", "getListTours", "getFavouritesByUser", "getUsername"]),
@@ -97,7 +100,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .main-section {
   margin-bottom: 0px;
   padding-top: 100px;
@@ -124,7 +127,7 @@ export default {
 }
 .btn_delete {
   background-color: purple;
-  border: 0px solid;
+  border: 1px solid purple;
   color: white;
 }
 .btn_delete:hover {

@@ -47,6 +47,7 @@ import { getAuth } from "firebase/auth";
 router.beforeEach((to, from, next) => {
   const { currentUser } = getAuth()
   const { meta: { authRequired } } = to
+  window.scrollTo(0, 0)
   if (currentUser && authRequired) {
     next()
   } else if (!currentUser && authRequired) {

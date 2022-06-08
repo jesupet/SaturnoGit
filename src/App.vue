@@ -54,6 +54,9 @@ export default {
   font-size: 100%;
   font-family: "Rubik";
 }
+body {
+  padding-bottom: 10vh;
+}
 .title {
   font-size: 40px;
   padding-top: 30px;
@@ -65,6 +68,23 @@ export default {
   background-color: black;
   margin: 0;
   padding: 0;
+  min-height: calc(100vh - 10vh);
+}
+.purple_btn {
+  background-color: purple;
+  border: 1px solid purple;
+  color: white;
+}
+.purple_btn:hover {
+  background-color: white;
+  border: 1px solid purple;
+  color: purple;
+}
+.purple_btn:focus {
+  background-color: purple;
+  border: 0px solid;
+  border-radius: 0px;
+  color: #fff;
 }
 
 </style>

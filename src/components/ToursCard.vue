@@ -1,10 +1,8 @@
 <template>
   <div class="col-12 row pb-4 m-0">
     <!--MODAL PARA SUGERIR LOGIN Y SIGNUP SI EL USUARIO NO ESTÁ LOGUEADO-->
-    <b-modal v-model="modalShow">
-      <LogInModal />
-      <SignUpModal />
-    </b-modal>
+     
+ 
     <!--FIN MODAL-->
     <div class="col-md-4 p-2" v-for="(tour, index) in listTours" :key="index">
       <div class="card mx-4 my-2 card_container">
@@ -19,16 +17,8 @@
             alt="Imagen"
             v-bind:src="tour.image_url"
           />
-          <button
-            @click.stop.prevent="
-              checkLoggedUser([activeUser, activeUser.email, tour.id])
-            "
-            @click="showAlert"
-            class="fav_btn"
-            type="button"
-          >
-            <font-awesome-icon icon="fa-solid fa-heart" size="2x" />
-          </button>
+          <SignUpAndLogIn/>
+          
           <b-alert
           
           class="position-fixed fixed-bottom m-0 rounded-0"
@@ -72,8 +62,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import DetailsModal from "../components/modals/DetailsModal.vue";
-import LogInModal from "./auth/LogInModal.vue";
-import SignUpModal from "./auth/SignUpModal.vue";
+import SignUpAndLogIn from "./auth/SignUpAndLogIn.vue";
 
 export default {
   name: "ToursCard",
@@ -81,6 +70,7 @@ export default {
     return {
       dismissSecs: 5,
       dismissCountDown: 0,
+      modalShow: false,
     }
   },
   props: {
@@ -88,8 +78,7 @@ export default {
   },
   components: {
     DetailsModal,
-    LogInModal,
-    SignUpModal,
+    SignUpAndLogIn,
   },
   methods: {
     countDownChanged(dismissCountDown) {

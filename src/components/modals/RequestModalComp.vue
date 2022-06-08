@@ -73,7 +73,7 @@ export default {
 <style scoped>
 .btn_rqst {
   background-color: purple;
-  border: 0px solid;
+  border: 1px solid purple;
   color: white;
 }
 .btn_rqst:hover {

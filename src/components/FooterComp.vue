@@ -3,9 +3,9 @@
     <footer class="footer-cont">
       <img
             src="../assets/saturn_logo.svg"
-            class="d-inline-block align-middle saturn-icon"
+            class="d-inline-block saturn-icon"
           />
-      <p class="mt-4">Este proyecto fue elaborado por: Sebastián Castillo y María Jesús Petour</p>
+      <p class="m-0">Este proyecto fue elaborado por: Sebastián Castillo y María Jesús Petour</p>
     </footer>
   </div>
 </template>
@@ -19,19 +19,19 @@ export default {
 
 <style scoped>
   .footer-cont{
-    height: 20vh;
+    height: 10vh;
     background-color: black;
-    margin: 0;
-    padding: 30px;
-    border-top: white 1px none;
+    margin: 0 auto;
     display: flex;
     color: white;
-    text-align: end;
     justify-content: center;
-    margin-top: auto;
-    position:relative;
+    align-items: center;
+    position:fixed;
     bottom: 0;
-    width: 100%
+    left:0;
+    width: 100vw;
+    z-index: 99;
+    font-size: 14px;
   }
   .saturn-icon {
     height: 70px;

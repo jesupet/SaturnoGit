@@ -94,7 +94,7 @@ export default {
 }
 .nav_comp {
   height: 100px;
-  background-color: rgba(0, 0, 0, 20%);
+  background-color: rgba(0, 0, 0, 60%);
   flex-wrap: wrap;
   
 }

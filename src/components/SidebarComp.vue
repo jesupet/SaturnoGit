@@ -33,7 +33,7 @@ export default {
 <style scoped>
   .btn_info {
   background-color: purple;
-  border: 0px solid;
+  border: 1px solid purple;
   color: white;
   }
   .btn_info:hover {
