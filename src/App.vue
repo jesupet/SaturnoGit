@@ -55,7 +55,7 @@ export default {
   font-family: "Rubik";
 }
 body {
-  padding-bottom: 10vh;
+  min-height: 100vh;
 }
 .title {
   font-size: 40px;

@@ -95,6 +95,7 @@ export default {
   padding-bottom: 150px;
   background: url(../assets/img/bg_img.jpeg);
   margin: 0%;
+  min-height: calc(100vh - 10vh);
 }
 
 .displayTour {

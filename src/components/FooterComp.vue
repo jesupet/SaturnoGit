@@ -26,11 +26,7 @@ export default {
     color: white;
     justify-content: center;
     align-items: center;
-    position:fixed;
-    bottom: 0;
-    left:0;
-    width: 100vw;
-    z-index: 99;
+    width: 100%;
     font-size: 14px;
   }
   .saturn-icon {

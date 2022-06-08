@@ -26,6 +26,7 @@ export default {
   background: url(../assets/img/bg_img.jpeg);
   margin: 0%;
   padding: 10px;
+  min-height: calc(100vh - 10vh);
 }
 .title {
   padding-top: 100px;
