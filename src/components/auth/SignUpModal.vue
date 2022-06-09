@@ -22,7 +22,7 @@
     >
       <form ref="form">
         <p class="btn btn-danger" v-if="this.validEmail === false">
-          INGRESE CORREO ELECTRÓNICO VÁLIDO
+          INGRESE CORREO ELECTRÓNICO Y/O CONTRASEÑA VÁLIDO
         </p>
         <p class="btn btn-info" v-if="this.userAlready === true">
           USUARIO YA EXISTE EN BASE DE DATOS
@@ -56,7 +56,7 @@
             aria-describedby="emailHelp"
             required
             v-model="user.email"
-            @click="validEmail = true, userAlready = false"
+            @click="(validEmail = true), (userAlready = false)"
           ></b-form-input>
         </b-form-group>
         <b-form-group label-for="Password-input">
@@ -68,6 +68,9 @@
             v-model="user.password"
             required
           ></b-form-input>
+          <p class="btn btn-light" v-if="user.password.length <= 7">
+            La contraseña debe tener mínimo 8 caracteres
+          </p>
         </b-form-group>
       </form>
       <div style="text-align: end; margin-top: 1rem">
@@ -115,7 +118,7 @@ export default {
       try {
         const { email, password, firstName, lastName } = this.user;
         const auth = getAuth();
-        if (/^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+        if (/^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/.test(email) && password.length >= 8) {
           await createUserWithEmailAndPassword(auth, email, password);
           await addDoc(collection(this.myFirestore, "saturnousers"), {
             userFirstName: firstName,
@@ -126,12 +129,10 @@ export default {
         } else {
           console.log("Ingrese correo válido");
           this.validEmail = false;
-          this.userAlready = false;
         }
       } catch {
         console.log("Este usuario ya existe");
         this.userAlready = true;
-        this.validEmail = true;
       }
     },
   },
