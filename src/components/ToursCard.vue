@@ -37,7 +37,7 @@
             @click.stop.prevent="
               checkLoggedUser([activeUser, activeUser.email, tour.id])
             "
-            @click="showAlert = !showAlert"
+            @click="showAlert"
             class="fav_btn"
             type="button"
           >

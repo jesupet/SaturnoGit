@@ -63,13 +63,13 @@
           <b-form-input
             :placeholder="'Contraseña'"
             type="password"
-            class="form-control my-3"
+            class="form-control my-3 mb-0"
             id="LogInComponent_Password"
             v-model="user.password"
             required
           ></b-form-input>
-          <p class="btn btn-light" v-if="user.password.length <= 7">
-            La contraseña debe tener mínimo 8 caracteres
+          <p class="reminder" v-if="user.password.length <= 7">
+            *La contraseña debe tener mínimo 8 caracteres
           </p>
         </b-form-group>
       </form>
@@ -165,5 +165,10 @@ export default {
   background-color: purple;
   border: 0px solid;
   color: #fff;
+}
+.reminder {
+  font-size: 12px;
+  font-weight: 300y;
+  color: white;
 }
 </style>
