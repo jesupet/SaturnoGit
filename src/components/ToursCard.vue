@@ -166,9 +166,12 @@ export default {
 .img_container_1 {
   height: 60%;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
 }
 .img-height {
   min-height: 100%;
+  min-width: 100%;
 }
 .fav_btn {
   position: absolute;

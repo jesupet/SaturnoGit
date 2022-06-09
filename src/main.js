@@ -10,7 +10,19 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 /* import specific icons */
-import { faArrowRight, faHeart, faBookmark, faAnglesDown, faTemperatureHalf, faWind, faArrowRightFromBracket, faTrash, faEye, faCircleQuestion, faPlaneDeparture } from '@fortawesome/free-solid-svg-icons'
+import { 
+  faArrowRight, 
+  faHeart, 
+  faBookmark, 
+  faAnglesDown, 
+  faTemperatureHalf, 
+  faWind, 
+  faArrowRightFromBracket, 
+  faTrash, faEye, 
+  faCircleQuestion, 
+  faPlaneDeparture, 
+  faXmark 
+} from '@fortawesome/free-solid-svg-icons'
 
 /* import font awesome icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -18,7 +30,19 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import 'animate.css';
 
 /* add icons to the library */
-library.add(faArrowRight, faHeart, faBookmark, faAnglesDown, faTemperatureHalf, faWind, faArrowRightFromBracket, faTrash, faEye, faCircleQuestion, faPlaneDeparture)
+library.add(
+  faArrowRight, 
+  faHeart, 
+  faBookmark, 
+  faAnglesDown, 
+  faTemperatureHalf, 
+  faWind, 
+  faArrowRightFromBracket, 
+  faTrash, faEye, 
+  faCircleQuestion, 
+  faPlaneDeparture, 
+  faXmark 
+)
 
 /* add font awesome icon component */
 Vue.component('font-awesome-icon', FontAwesomeIcon)

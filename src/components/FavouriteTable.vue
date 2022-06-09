@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="main-section px-5 table-responsive">
-      <h1 class="title">Tus tours favoritos</h1>
+      
+      <h2 v-if="getFavouritesByUser.length == 0" class="title" >AL PARECER NO TIENES TOURS AGREGADOS A FAVORITOS</h2>
+      <h1 class="title" v-else>Tus tours favoritos</h1>
       <table class="table">
         <thead style="color: white">
           <tr>

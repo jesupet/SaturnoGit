@@ -31,7 +31,7 @@ export default {
   }
   .saturn-icon {
     height: 70px;
-    margin-right: 20px;
+    margin: 0px 20px;
   }
 </style>
 

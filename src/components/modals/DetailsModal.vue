@@ -6,15 +6,19 @@
 
     <b-modal 
       :id="'modalDetails' + idKey" 
-      :title="tour.name" 
       v-model="show"
       body-bg-variant="dark"
       body-text-variant="light"
       header-bg-variant="dark"
       header-text-variant="light"
-      hide-header-close
       hide-footer
       >
+      <template #modal-header>
+        {{tour.name}}
+        <button class="close_btn" @click="$bvModal.hide('modalDetails' + idKey)">
+          <font-awesome-icon cancel icon="fa-solid fa-xmark" class="ml-0 mr-auto"/>
+        </button>
+      </template>
       <b-img :src="tour.image_url" fluid alt="Responsive image"></b-img>
       <p class="my-4">{{ tour.description }}</p>
       <template #modal-footer>
@@ -65,5 +69,10 @@ export default {
   border: 0px solid;
   border-radius: 0px;
   color: #fff;
+}
+.close_btn {
+  background: none;
+  border: 0;
+  color: white;
 }
 </style>

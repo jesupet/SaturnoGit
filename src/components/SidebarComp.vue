@@ -7,8 +7,8 @@
       :id="'sidebar' + tourData.id" 
       :title="tourData.name" 
       shadow 
-      right 
-      width="30%" 
+      right
+      class="sidebar" 
       bg-variant="dark" 
       text-variant="light"
       no-header-close
@@ -49,4 +49,11 @@ export default {
     border-radius: 0px;
     color: #fff;
   }
+  .sidebar {
+    width: 30%;
+    @media screen and (max-width: 700px) {
+      width: 70%
+    }
+  }
+
 </style>
