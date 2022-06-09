@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import UserView from '../views/UserView.vue'
 import ToursView from '../views/ToursView.vue'
-import TestView from "../views/TestView"
 
 Vue.use(VueRouter)
 
@@ -23,11 +22,6 @@ const routes = [
     name: 'userView',
     component: UserView,
     meta: { authRequired: true }
-  },
-  {
-    path: '/testing',
-    name: 'testView',
-    component: TestView,
   },
   {
     path: "/:catchAll(.*)",

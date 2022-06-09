@@ -28,6 +28,8 @@ export default {
     align-items: center;
     width: 100%;
     font-size: 14px;
+    position: relative;
+    z-index: 1;
   }
   .saturn-icon {
     height: 70px;
