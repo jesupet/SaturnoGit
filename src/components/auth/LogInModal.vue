@@ -6,6 +6,7 @@
       class="nav_btn btn_yellow"
       type="submit"
       v-b-modal="'LogInModal'"
+      @click="resetUserPassCheck"
       >Ingresa</b-button
     >
     <b-modal 
@@ -19,6 +20,7 @@
       hide-footer
       hide-header-close>
       <form ref="form">
+        <h2 class="btn btn-danger" v-if="getUserPassCheck === false">USUARIO Y/O CONTRASEÑA NO RECONOCIDOS</h2>
         <b-form-group
           label="Usuario"
           label-for="Usuario-input"
@@ -31,6 +33,7 @@
             aria-describedby="emailHelp"
             required
             @input="setUsername"
+            @focus="resetUserPassCheck"
           ></b-form-input>
         </b-form-group>
         <b-form-group
@@ -43,6 +46,7 @@
             class="form-control"
             id="LogInComponent_Password"
             @input="setPassword"
+            @focus="resetUserPassCheck"
             required
           ></b-form-input>
         </b-form-group>
@@ -70,7 +74,7 @@ export default {
     id: String,
   },
   methods: {
-    ...mapActions(["setUsername", "setPassword", "logInUser"]),
+    ...mapActions(["setUsername", "setPassword", "logInUser", "resetUserPassCheck"]),
     showModal() {
       this.$refs["my-modal"].show();
     },
@@ -84,8 +88,12 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["getUsername", "getPassword"]),
+    ...mapGetters(["getUsername", "getPassword", "getUserPassCheck"]),
   },
+  beforeMount() {
+    this.resetUserPassCheck
+  },
+  
 };
 </script>
 

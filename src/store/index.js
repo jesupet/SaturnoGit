@@ -9,6 +9,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     myFirestore: null,
+    userPassCheck: true,
     listTours: [],
     dataTable: [],
     listUsers: [],
@@ -81,6 +82,9 @@ export default new Vuex.Store({
       } else {
         return user1.currentUser
       }
+    },
+    getUserPassCheck(state){
+      return state.userPassCheck
     },
     getOnemiData(state) {
       return state.onemiData
@@ -197,6 +201,9 @@ export default new Vuex.Store({
     },
     mutateUsername(state, inputUser) {
       state.user.email = inputUser
+    },
+    mutateUserPassCheck(state, checking) {
+      state.userPassCheck = checking
     },
     mutatePassword(state, inputPassword) {
       state.user.password = inputPassword
@@ -322,6 +329,8 @@ export default new Vuex.Store({
         context.commit("mutatePassword", "")
       } catch (error) {
         console.log("Usuario y/o contraseña no reconocidos");
+        let param1 = false
+        context.commit('mutateUserPassCheck', param1)
       }
     },
     logOutUser() {
@@ -333,6 +342,9 @@ export default new Vuex.Store({
         .catch(() => {
           // An error happened.
         });
+    },
+    resetUserPassCheck(context){
+      context.commit("mutateUserPassCheck", true);
     },
     setUsername(context, inputUsername) {
       context.commit("mutateUsername", inputUsername);

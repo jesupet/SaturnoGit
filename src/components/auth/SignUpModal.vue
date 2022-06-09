@@ -9,10 +9,10 @@
     >
       Regístrate
     </b-button>
-    <b-modal 
-      id="SignUpModal" 
-      ref="modal" 
-      title="Regístrate a Sa-Tour-Now!" 
+    <b-modal
+      id="SignUpModal"
+      ref="modal"
+      title="Regístrate a Sa-Tour-Now!"
       hide-footer
       body-bg-variant="dark"
       body-text-variant="light"
@@ -21,9 +21,13 @@
       hide-header-close
     >
       <form ref="form">
-        <b-form-group
-          label-for="Usuario-DatosPersonales"
-        >
+        <p class="btn btn-danger" v-if="this.validEmail === false">
+          INGRESE CORREO ELECTRÓNICO VÁLIDO
+        </p>
+        <p class="btn btn-info" v-if="this.userAlready === true">
+          USUARIO YA EXISTE EN BASE DE DATOS
+        </p>
+        <b-form-group label-for="Usuario-DatosPersonales">
           <b-form-input
             :placeholder="'Nombre'"
             type="text"
@@ -43,9 +47,7 @@
             v-model="user.lastName"
           ></b-form-input>
         </b-form-group>
-        <b-form-group
-          label-for="Usuario-input"
-        >
+        <b-form-group label-for="Usuario-input">
           <b-form-input
             :placeholder="'Correo electrónico'"
             type="email"
@@ -54,11 +56,10 @@
             aria-describedby="emailHelp"
             required
             v-model="user.email"
+            @click="validEmail = true, userAlready = false"
           ></b-form-input>
         </b-form-group>
-        <b-form-group
-          label-for="Password-input"
-        >
+        <b-form-group label-for="Password-input">
           <b-form-input
             :placeholder="'Contraseña'"
             type="password"
@@ -70,7 +71,10 @@
         </b-form-group>
       </form>
       <div style="text-align: end; margin-top: 1rem">
-        <b-button @click.stop.prevent="SignUpUser" variant="outline-primary" class="sign_btn"
+        <b-button
+          @click.stop.prevent="SignUpUser"
+          variant="outline-primary"
+          class="sign_btn"
           >Guardar datos</b-button
         >
       </div>
@@ -86,7 +90,17 @@ import { mapState } from "vuex";
 export default {
   name: "SignUpComp",
   data() {
-    return { user: { email: "", password: "", firstName: "", lastName: "" } };
+    return {
+      user: {
+        email: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        validEmail: true,
+      },
+      validEmail: true,
+      userAlready: false,
+    };
   },
   props: {
     id: String,
@@ -96,23 +110,29 @@ export default {
   },
   methods: {
     async SignUpUser() {
+      this.validEmail = true;
+      this.userAlready = false;
       try {
         const { email, password, firstName, lastName } = this.user;
         const auth = getAuth();
-        if (/^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+        if (/^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
           await createUserWithEmailAndPassword(auth, email, password);
           await addDoc(collection(this.myFirestore, "saturnousers"), {
             userFirstName: firstName,
             userLastName: lastName,
             user_email: email,
           }),
-          this.$router.push("/users");
-          } else {
-              console.log("Ingrese correo válido");
-            }
+            this.$router.push("/tours");
+        } else {
+          console.log("Ingrese correo válido");
+          this.validEmail = false;
+          this.userAlready = false;
+        }
       } catch {
-          console.log("Este usuario ya existe");
-        }  
+        console.log("Este usuario ya existe");
+        this.userAlready = true;
+        this.validEmail = true;
+      }
     },
   },
 };
@@ -123,10 +143,10 @@ export default {
   padding: 0.7em;
   margin: 1em;
 }
-.btn_yellow:hover{
+.btn_yellow:hover {
   background-color: white;
 }
-.btn_yellow:focus{
+.btn_yellow:focus {
   outline: none;
   box-shadow: none;
 }
